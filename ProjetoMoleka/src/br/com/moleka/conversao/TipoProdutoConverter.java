@@ -30,6 +30,7 @@ public class TipoProdutoConverter implements Converter {
 
 	@Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object value) {
+		System.out.println("teste gitHub.");
         if (value == null || value.equals("")) {
             return "";
         } else {
