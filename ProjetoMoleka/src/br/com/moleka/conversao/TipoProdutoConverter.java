@@ -15,26 +15,21 @@ public class TipoProdutoConverter implements Converter {
 	
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
-		System.out.println("getAsObject....");
         if (submittedValue.trim().equals("")) {
             return null;
         } else {
             try {
                 long id = Long.parseLong(submittedValue);
-
                 TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager());
-                return tipoProdutoDAO.obterTipoProdutoPorCodigo(id);
-                
-              
+                return tipoProdutoDAO.obterTipoProdutoPorCodigo(id);        
             } catch(NumberFormatException exception) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid player"));
+                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na conversão", "Não é um tipo de produto válido."));
             }
         }
     }
 
 	@Override
     public String getAsString(FacesContext facesContext, UIComponent component, Object value) {
-		System.out.println("getAsString....");
         if (value == null || value.equals("")) {
             return "";
         } else {
