@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:niltech="http://java.sun.com/jsf/composite/niltech"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<ui:composition template="/_tamplete.xhtml">
+		
+		<ui:define name="corpo">
+		
+			<h:form id="frmCadastroCliente" >
+	
+		<p:panel header="Cadastro de Cliente" styleClass="grid-12-12">
+			
+  				
+  				<p:tabView id="frmCadastroCliente" styleClass="grid-12-12">	
+  
+					<p:tab title="Dados Pessoais">
+			
+						<div class="grid-5-12">
+			
+							<niltech:campoTexto id="nome" rotulo="Nome: " valor="#{pessoaBean.pessoa.nome}"  tamanho="50" />
+						</div>
+
+
+						<div class="grid-4-12">
+							<niltech:campoTexto id="email" rotulo="E-mail: " valor="#{pessoaBean.pessoa.email}" tamanho="40" />
+						</div>
+			
+
+						<div class="grid-3-12">
+							<niltech:campoMascara id="telefone" rotulo="Telefone: " mascara="(99)9999-9999" valor="#{pessoaBean.pessoa.telefone}" tamanho="30" />
+						</div>
+			
+			
+						<div class="grid-12-12">
+							<niltech:campoMascara id="celular" rotulo="Celular:  " mascara="(99)9999-9999" valor="#{pessoaBean.pessoa.celular}" tamanho="20" />
+						</div>
+			
+				  </p:tab>
+		
+				  <p:tab title="Endereço">
+
+						<div class="grid-3-12">	
+							<niltech:campoMascara id="cep" rotulo="Cep: " mascara="99.999-999" valor="#{pessoaBean.pessoa.endereco.cep}" />
+						</div>	
+			
+						<div class="grid-4-12">
+							<niltech:campoTexto id="bairro" rotulo="Bairro "  valor="#{pessoaBean.pessoa.endereco.bairro}" tamanho="30"   />
+						</div>
+			
+						<div class="grid-5-12">
+							<niltech:campoTexto id="logradouro" rotulo="Logradouro: "  valor="#{pessoaBean.pessoa.endereco.logradouro}" tamanho="50"   />
+						</div>
+			
+						<div class="grid-3-12">
+							<h:outputLabel for="uf" value="UF: " styleClass="formee-lbl" />
+								<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf" styleClass="formee-small" >
+									<f:selectItems value="#{enderecoBean.ufList}" var="uf" itemValue="#{uf}" itemLabel="#{uf}" />
+								</p:selectOneMenu>	
+						</div>
+			
+						<div class="grid-9-12">
+								<h:outputLabel value="Cidade :" for="cidade" >
+								<em class="formee-lbl"></em>
+								</h:outputLabel>
+            					<p:autoComplete id="cidade" value="#{pessoaBean.pessoa.endereco.cidade}"   
+                    				completeMethod="#{enderecoBean.complete}" styleClass="formee-txt" />  
+						</div>
+				 </p:tab>
+			
+			  </p:tabView>
+						<div class="grid-12-12">
+								<p:commandButton value="Salvar" actionListener="#{pessoaBean.salvar}" update=":frmCadastroCliente :frmPesquisaCliente :mensagem" />
+						</div>
+			</p:panel>
+
+			</h:form>
+			
+			<h:form id="frmPesquisaCliente">
+		
+							<h:panelGroup id="panelGroupGrid">
+						<p:dataTable value="#{pessoaBean.pessoas}" var="pessoa"
+							emptyMessage="Nenhum registro encontrado" id="grid"
+							styleClass="grid-12-12" paginator="true" rows="8">
+		
+							<p:column headerText="Nome" width="400">
+								<h:outputText value="#{pessoa.nome}" />
+							</p:column>
+		
+							<p:column headerText="Telefone" width="150">
+								<h:outputText value="#{pessoa.telefone}" />
+							</p:column>
+		
+							<p:column headerText="E-mail" width="300">
+								<h:outputText value="#{pessoa.email}" />
+							</p:column>
+		
+							<p:column headerText="Selecionar" width="100">
+								<p:commandLink action="#{pesquisaClienteBean.selecionar(pessoa)}"
+									ajax="false" value="selecionar" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
+					</h:form>
+					
+			<div class="grid12-12">
+			
+				<h:panelGroup styleClass="grid-12-12">
+				
+				</h:panelGroup>
+			
+			</div>		
+		</ui:define>	
+	</ui:composition>
+
+</html>

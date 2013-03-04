@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:niltech="http://java.sun.com/jsf/composite/niltech"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<h:outputScript name="formee.js" library="js" />
+	<h:outputStylesheet name="formee-structure.css" library="css" />
+
+</h:head>
+
+  <h2>Sistema em fase de desenvolvimento</h2>
+ <p:accordionPanel activeIndex="1">
+        <p:tab title="Pilha" >
+              	<p:inputTextarea value="#{error.stackTrace}"  label="Pilha de Erro - Sistema em fase de desenvolvimento" rows="200" cols="150"  />
+        </p:tab>
+        <p:tab title="Sobre">
+               <h:outputText value="Marcelo Garces Guilherme" />
+</p:tab>
+</p:accordionPanel>
+ 
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:niltech="http://java.sun.com/jsf/composite/niltech"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>::: Sistema de Pedido Moleka :::</title>
+	<h:outputScript name="formee.js" library="js" />
+	<h:outputStylesheet name="formee-structure.css" library="css" />
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+	<p:growl id="mensagem" />
+
+	<div id="cabecalho">
+		<p:graphicImage library="imagens" name="moleka(1).jpg"
+			id="logoCompany" />
+		<div id="usuarioLogado" align="right" style="color: black;">
+			Logado como: Teste</div>
+	</div>
+
+	<div id="conteudo">
+		<h:form>
+
+			<p:menubar autoDisplay="true" >
+				<p:submenu label="Cadastro">
+					<p:menuitem value="Cliente" url="cadastro_cliente.jsf" />
+					<p:separator />
+					<p:menuitem value="Produto" url="produto.jsf" />
+				</p:submenu>
+
+				<p:submenu label="Consulta" >
+					<p:menuitem value="Cliente" url="pesquisa_cliente.jsf"/>
+					<p:menuitem value="Produto" url="#"/>
+				</p:submenu>
+				<p:menuitem value="Pedido" url="pedido.jsf"/>
+				<p:menuitem value="Sair" url="#"/>
+				
+			</p:menubar>
+		</h:form>
+		<br />
+
+		<ui:insert name="corpo" />
+
+	</div>
+
+	<div id="rodape">
+
+		<h:outputText
+			value="Copyright 2013. Todos os direitos reservados a Niltech Informática" />
+
+	</div>
+
+</h:body>
+</html>

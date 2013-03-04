@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:niltech="http://java.sun.com/jsf/composite/niltech"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/_tamplete.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form id="frmPesquisaCliente">
+
+			<p:panel header="Pesquisar Cliente" styleClass="grid-12-12">
+
+				<div class="grid-4-12">
+					<niltech:campoTexto valor="#{pesquisaClienteBean.nomePesq}" tamanho="50"
+						rotulo="Nome: " />
+				</div>
+				<div class="grid-2-12">
+					<niltech:campoMascara valor="#{pesquisaClienteBean.telefonePesq}"
+						tamanho="30" rotulo="Telefone: " mascara="(99)9999-9999" />
+				</div>
+				<div class="grid-2-12" style="margin-top: 20px">
+					<p:commandButton value="Pesquisar"
+						actionListener="#{pesquisaClienteBean.pesquisar}" update=":frmPesquisaCliente :mensagem" />
+				</div>
+
+			</p:panel>
+			<h:panelGroup id="panelGroupGrid">
+				<p:dataTable value="#{pesquisaClienteBean.pessoas}" var="pessoa"
+					emptyMessage="Nenhum registro encontrado" id="grid"
+					styleClass="grid-12-12" paginator="true" rows="8"
+					rendered="#{pesquisaClienteBean.existePessoas}">
+
+					<p:column headerText="Nome" width="400">
+						<h:outputText value="#{pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="Telefone" width="150">
+						<h:outputText value="#{pessoa.telefone}" />
+					</p:column>
+
+					<p:column headerText="E-mail" width="300">
+						<h:outputText value="#{pessoa.email}" />
+					</p:column>
+
+					<p:column headerText="Selecionar" width="100">
+						<p:commandLink action="#{pesquisaClienteBean.selecionar(pessoa)}"
+							ajax="false" value="selecionar" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

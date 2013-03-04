@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:niltech="http://java.sun.com/jsf/composite/niltech"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/_tamplete.xhtml">
+	<ui:define name="corpo">
+		<h:form id="frmProduto">
+			<p:panel header="Cadastro Produto" styleClass="grid-12-12">
+				<div class="grid-4-12">	
+					<niltech:campoTexto rotulo="Descrição"
+						valor="#{produtoBean.produto.descricao}" tamanho="40" />
+				</div>
+				<div class="grid-2-12">
+				
+				<h:outputLabel for="#{inputProduto}" value="Preço: ">
+					<em class="formee-lbl"></em>
+					</h:outputLabel>
+					<p:inputText value="#{produtoBean.produto.preco}" id="inputProduto">
+						<f:converter converterId="javax.faces.BigDecimal"/>
+					</p:inputText>
+				</div>
+				<div class="grid-4-12">	
+					<h:outputLabel id="outputTipo" for="selectTipo" value="Tipo Produto: ">
+					<em class="formee-lbl"></em>
+					</h:outputLabel>   				
+					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}"  panelStyle="width:150px"  
+                         effect="fold" var="p" style="width:160px"  filter="true" filterMatchMode="startsWith" converter="tipoProduto">  
+            				 <f:selectItem itemLabel="Selecione..." itemValue="" />  
+           					 <f:selectItems value="#{produtoBean.tipoProdutos}" var="tipoProduto" itemLabel="#{tipoProduto.descricao}" itemValue="#{tipoProduto}"/>  
+         					   <p:column>  
+               					 #{p} 
+         					   </p:column>  
+      			    </p:selectOneMenu>  
+				</div>
+				<div class="grid-2-12" />
+				<div class="grid-12-12">
+					<p:commandButton value="Salvar"
+						actionListener="#{produtoBean.salvar}"
+						update=":frmProduto :mensagem :frmGridProduto " />
+				</div>
+			</p:panel>
+			</h:form>
+
+			<h:form id="frmGridProduto">
+					<h:panelGroup id="panelGroupGrid">
+				<p:dataTable value="#{produtoBean.produtos}" var="p"
+					emptyMessage="Nenhum registro encontrado" id="grid"
+					styleClass="grid-12-12" paginator="true" rows="8">
+
+					<p:column headerText="Descrição" width="400">
+						<h:outputText value="#{p.descricao}" />
+					</p:column>
+
+					<p:column headerText="Preço	" width="150">
+						<h:outputText value="#{p.preco}" />
+					</p:column>
+
+					<p:column headerText="Editar" width="50">
+						<p:commandLink action="#{produtoBean.editar(p)}"
+							value="editar" />
+					</p:column>
+					<p:column headerText="Excluir" width="50">
+						<p:commandLink action="#{produtoBean.excluir(p)}"
+							value="excluir" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+			</h:form>
+			<div class="grid12-12">
+				<h:panelGroup styleClass="grid-12-12">	
+				</h:panelGroup>
+			</div>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Sistema para gerar rota</title>
+	<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+	<script
+		src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAAaVFxs6kNq7gWY59qf5XMxSec6s_uUscdbTyPSy8oWl8zYzqFRRanjFebOU60thMmEQQDEPx3A3y5Q"
+		type="text/javascript"></script>
+	<script type="text/javascript">
+		var map = null;
+		var geocoder = null;
+		var from;
+		var to;
+		var directionsPanel = null;
+		var directions = null;
+
+		function inicializa() {
+			if (GBrowserIsCompatible()) {
+				map = new GMap2(document.getElementById("mapa_base"));
+				//map.setCenter(new GLatLng(-22.809287, -43.413979), 16);
+				geocoder = new GClientGeocoder();
+				map.addControl(new GSmallMapControl());
+				map.addControl(new GMapTypeControl());
+				directionsPanel = document.getElementById("route");
+				directions = new GDirections(map, directionsPanel);
+				gerarRota();
+
+			}
+		}
+		function gerarRota() {
+			from = document.getElementById("form_mapa:partida").value;
+			to = document.getElementById("form_mapa:destino").value;
+			if (geocoder) {
+				geocoder.getLatLng(from, function(point) {
+					if (!point) {
+						alert(from + " não encontrado");
+					}
+				});
+				geocoder.getLatLng(to, function(point) {
+					if (!point) {
+						alert(to + " não encontrado");
+					}
+				});
+
+				var string = "from: " + from + " to: " + to;
+				directions.clear();
+				directions.load(string);
+				GEvent.addListener(directions, "error", erroGetRoute);
+			} else {
+				alert("GeoCoder não identificado");
+			}
+		}
+
+		function erroGetRoute() {
+			alert("Não foi possivel traçar a rota de: " + from + " para: " + to);
+		}
+
+		// Tipos de mapas  : ROADMAP , SATELLITE , HYBRID e TERRAIN
+	</script>
+
+	<script src="http://maps.google.com/maps/api/js?sensor=true"
+		type="text/javascript"></script>
+</h:head>
+<h:body onload="inicializa()" onunload="GUnload()" >
+	<h:form id="form_mapa" action="#" method="get">
+		<h:inputHidden id="partida" value="#{googleMapBean.partida}" />
+		<h:inputHidden id="destino" value="#{googleMapBean.destino}" />
+	</h:form>
+	<div id="mapa_base" style="width: 800px; height: 500px;"></div>
+	<div id="route"	style="width: 300px; height: 500px; position: absolute; right: 0; top: 0;"></div>
+	<br />
+</h:body>
+</html>
+
+
+
