@@ -9,31 +9,35 @@
 	<ui:define name="corpo">
 		<h:form id="frmProduto">
 			<p:panel header="Cadastro Produto" styleClass="grid-12-12">
-				<div class="grid-4-12">	
+				<div class="grid-4-12">
 					<niltech:campoTexto rotulo="Descrição"
 						valor="#{produtoBean.produto.descricao}" tamanho="40" />
 				</div>
 				<div class="grid-2-12">
-				
-				<h:outputLabel for="#{inputProduto}" value="Preço: ">
-					<em class="formee-lbl"></em>
+
+					<h:outputLabel for="#{inputProduto}" value="Preço: ">
+						<em class="formee-lbl"></em>
 					</h:outputLabel>
 					<p:inputText value="#{produtoBean.produto.preco}" id="inputProduto">
-						<f:converter converterId="javax.faces.BigDecimal"/>
+						<f:converter converterId="javax.faces.BigDecimal" />
 					</p:inputText>
 				</div>
-				<div class="grid-4-12">	
-					<h:outputLabel id="outputTipo" for="selectTipo" value="Tipo Produto: ">
-					<em class="formee-lbl"></em>
-					</h:outputLabel>   				
-					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}"  panelStyle="width:150px"  
-                         effect="fold" var="p" style="width:160px"  filter="true" filterMatchMode="startsWith" converter="tipoProduto">  
-            				 <f:selectItem itemLabel="Selecione..." itemValue="" />  
-           					 <f:selectItems value="#{produtoBean.tipoProdutos}" var="tipoProduto" itemLabel="#{tipoProduto.descricao}" itemValue="#{tipoProduto}"/>  
-         					   <p:column>  
+				<div class="grid-4-12">
+					<h:outputLabel id="outputTipo" for="selectTipo"
+						value="Tipo Produto: ">
+						<em class="formee-lbl"></em>
+					</h:outputLabel>
+					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}"
+						panelStyle="width:150px" effect="fold" var="p" style="width:160px"
+						filter="true" filterMatchMode="startsWith" converter="tipoProduto">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{produtoBean.tipoProdutos}"
+							var="tipoProduto" itemLabel="#{tipoProduto.descricao}"
+							itemValue="#{tipoProduto}" />
+						<p:column>  
                					 #{p} 
-         					   </p:column>  
-      			    </p:selectOneMenu>  
+         					   </p:column>
+					</p:selectOneMenu>
 				</div>
 				<div class="grid-2-12" />
 				<div class="grid-12-12">
@@ -42,10 +46,10 @@
 						update=":frmProduto :mensagem :frmGridProduto " />
 				</div>
 			</p:panel>
-			</h:form>
+		</h:form>
 
-			<h:form id="frmGridProduto">
-					<h:panelGroup id="panelGroupGrid">
+		<h:form id="frmGridProduto">
+			<h:panelGroup id="panelGroupGrid">
 				<p:dataTable value="#{produtoBean.produtos}" var="p"
 					emptyMessage="Nenhum registro encontrado" id="grid"
 					styleClass="grid-12-12" paginator="true" rows="8">
@@ -59,20 +63,28 @@
 					</p:column>
 
 					<p:column headerText="Editar" width="50">
-						<p:commandLink action="#{produtoBean.editar(p)}"
-							value="editar" />
+						<p:commandLink action="#{produtoBean.editar(p)}" value="editar" />
 					</p:column>
 					<p:column headerText="Excluir" width="50">
-						<p:commandLink action="#{produtoBean.excluir(p)}"
-							value="excluir" />
+						<p:commandLink value="excluir" onclick="confirmation.show()" />
 					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
-			</h:form>
-			<div class="grid12-12">
-				<h:panelGroup styleClass="grid-12-12">	
-				</h:panelGroup>
-			</div>
+			<p:confirmDialog id="confirmDialog"
+				message="Deseja realmente excluir ?" header="Exclusão de Produto"
+				severity="alert" widgetVar="confirmation">
+
+				<p:commandButton id="confirm" value="Sim"
+					update=":mensagem :frmGridProduto" oncomplete="confirmation.hide()"
+					actionListener="#{produtoBean.excluir(p)}" />
+				<p:commandButton id="decline" value="Não"
+					onclick="confirmation.hide()" type="button" />
+			</p:confirmDialog>
+		</h:form>
+		<div class="grid12-12">
+			<h:panelGroup styleClass="grid-12-12">
+			</h:panelGroup>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

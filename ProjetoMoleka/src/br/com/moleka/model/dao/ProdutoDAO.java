@@ -24,5 +24,9 @@ public class ProdutoDAO {
 	public void salvar(Produto produto){
 		dao.salvar(produto);
 	}
+	
+	public void excluir(Produto produto){
+		dao.excluir(produto);
+	}
 
 }

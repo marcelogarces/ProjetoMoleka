@@ -45,6 +45,12 @@ public class ProdutoBean {
 		this.produto = new Produto();
 		this.produtos = produtoDAO.listarTodos();
 	}
+	
+	public void excluir(Produto produto){
+		produtoDAO.excluir(produto);
+		this.produtos = produtoDAO.listarTodos();
+		FacesContextUtil.setMensagemInfo("Produto removido com sucesso.");
+	}
 
 	public List<TipoProduto> getTipoProdutos() {
 		if(tipoProdutos == null){

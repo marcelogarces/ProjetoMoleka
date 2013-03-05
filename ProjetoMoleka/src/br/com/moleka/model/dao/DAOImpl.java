@@ -35,8 +35,7 @@ class DAOImpl<T> implements DAO<T>,Serializable {
 
 	@Override
 	public void excluir(T bean) {
-		// TODO Auto-generated method stub
-		
+		entityManager.remove(bean);
 	}
 
 	@Override
