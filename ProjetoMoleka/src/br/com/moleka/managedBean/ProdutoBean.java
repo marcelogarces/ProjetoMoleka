@@ -2,7 +2,7 @@ package br.com.moleka.managedBean;
 
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import br.com.moleka.model.dao.ProdutoDAO;
 import br.com.moleka.model.dao.TipoProdutoDAO;
 import br.com.moleka.model.dominio.Produto;
@@ -10,7 +10,7 @@ import br.com.moleka.model.dominio.TipoProduto;
 import br.com.moleka.util.FacesContextUtil;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ProdutoBean {
 	
 	private ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
