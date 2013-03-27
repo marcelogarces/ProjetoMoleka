@@ -34,9 +34,9 @@
 						<f:selectItems value="#{produtoBean.tipoProdutos}"
 							var="tipoProduto" itemLabel="#{tipoProduto.descricao}"
 							itemValue="#{tipoProduto}" />
-						<p:column>  
-               					 #{p} 
-         					   </p:column>
+						<p:column>
+               						 #{p}
+          					</p:column>
 					</p:selectOneMenu>
 				</div>
 				<div class="grid-2-12" />
@@ -58,7 +58,7 @@
 						<h:outputText value="#{p.descricao}" />
 					</p:column>
 
-					<p:column headerText="Preço	" width="150">
+					<p:column headerText="Preço " width="150">
 						<h:outputText value="#{p.preco}" />
 					</p:column>
 
@@ -66,20 +66,20 @@
 						<p:commandLink action="#{produtoBean.editar(p)}" value="editar" />
 					</p:column>
 					<p:column headerText="Excluir" width="50">
-						<p:commandLink value="excluir" onclick="confirmation.show()" />
+ 							<p:commandButton id="btnExcluirProduto" value="excluir" image="ui-icon ui-icon-close" oncomplete="confirmation.show()" >
+ 									<f:setPropertyActionListener target="#{produtoBean.produto}" value="#{p}" />
+ 							</p:commandButton>
+ 							
 					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
-			<p:confirmDialog id="confirmDialog"
-				message="Deseja realmente excluir ?" header="Exclusão de Produto"
-				severity="alert" widgetVar="confirmation">
-
-				<p:commandButton id="confirm" value="Sim"
-					update=":mensagem :frmGridProduto" oncomplete="confirmation.hide()"
-					actionListener="#{produtoBean.excluir(p)}" />
-				<p:commandButton id="decline" value="Não"
-					onclick="confirmation.hide()" type="button" />
-			</p:confirmDialog>
+                    <p:confirmDialog widgetVar="confirmation" id="excluirProduto" header="Delete" message="Deseja deletar o produto ?"
+                 				width="400" modal="true" closable="false" severity="alert">
+			        	<h:panelGroup layout="block" style="text-align: right">
+				            <p:commandButton value="Sim" action="#{produtoBean.excluir}" oncomplete="confirmation.hide();" update=":frmGridProduto :mensagem" />
+				            <p:commandButton value="Não" action="#{produtoBean.cancelar}" oncomplete="confirmation.hide();" />
+			        	</h:panelGroup>
+			    	</p:confirmDialog>
 		</h:form>
 		<div class="grid12-12">
 			<h:panelGroup styleClass="grid-12-12">
@@ -88,3 +88,4 @@
 	</ui:define>
 </ui:composition>
 </html>
+
