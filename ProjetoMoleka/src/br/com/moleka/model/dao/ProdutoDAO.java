@@ -28,5 +28,9 @@ public class ProdutoDAO {
 	public void excluir(Produto produto){
 		dao.excluir(produto);
 	}
+	
+	public Produto obterProdutoPorCodigo(Long id){
+		return dao.getBean(id);
+	}
 
 }
