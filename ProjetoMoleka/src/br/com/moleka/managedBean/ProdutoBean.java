@@ -3,6 +3,7 @@ package br.com.moleka.managedBean;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import br.com.moleka.model.dao.ProdutoDAO;
 import br.com.moleka.model.dao.TipoProdutoDAO;
 import br.com.moleka.model.dominio.Produto;
@@ -14,7 +15,6 @@ import br.com.moleka.util.FacesContextUtil;
 public class ProdutoBean {
 	
 	private ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
-	private TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager());
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
 	private List<TipoProduto>tipoProdutos;
@@ -40,6 +40,7 @@ public class ProdutoBean {
 	}
 
 	public void salvar() {
+		produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
 		produtoDAO.salvar(produto);
 		FacesContextUtil.setMensagemInfo("Produto gravado com sucesso.");
 		this.produto = new Produto();
@@ -50,6 +51,7 @@ public class ProdutoBean {
 		produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
 		produtoDAO.excluir(produtoDAO.obterProdutoPorCodigo(produto.getId()));
 		this.produtos = produtoDAO.listarTodos();
+		this.produto = new Produto();
 		FacesContextUtil.setMensagemInfo("Produto removido com sucesso.");
 	}
 	
@@ -59,6 +61,7 @@ public class ProdutoBean {
 
 
 	public List<TipoProduto> getTipoProdutos() {
+		TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager());
 		if(tipoProdutos == null){
 			this.tipoProdutos = tipoProdutoDAO.listarTodos();
 		}
@@ -69,3 +72,4 @@ public class ProdutoBean {
 		this.tipoProdutos = tipoProdutos;
 	}
 }
+
