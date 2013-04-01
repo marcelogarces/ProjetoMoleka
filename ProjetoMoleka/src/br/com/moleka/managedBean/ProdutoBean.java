@@ -49,10 +49,16 @@ public class ProdutoBean {
         
         public void excluir(){
 		produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
-		produtoDAO.excluir(produtoDAO.obterProdutoPorCodigo(produto.getId()));
+		Produto produto = produtoDAO.obterProdutoPorCodigo(this.produto.getId());
+		if(produto != null){
+			produtoDAO.excluir(produto);
+			FacesContextUtil.setMensagemInfo("Produto removido com sucesso.");
+		}else{
+			FacesContextUtil.setMensagemInfo("Produto excluido por outro usuário.");
+		}
+		
 		this.produtos = produtoDAO.listarTodos();
 		this.produto = new Produto();
-		FacesContextUtil.setMensagemInfo("Produto removido com sucesso.");
 	}
 	
 	public void cancelar() {
