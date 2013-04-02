@@ -1,5 +1,6 @@
 package br.com.moleka.managedBean;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,8 +13,12 @@ import br.com.moleka.util.FacesContextUtil;
 
 @ManagedBean
 @ViewScoped
-public class ProdutoBean {
+public class ProdutoBean implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
