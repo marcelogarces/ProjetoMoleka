@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -24,11 +26,11 @@ public class Endereco implements Serializable {
 	@Length(max=2,min=2,message="O mínimo 2 e máximo 2 campos")
 	private String uf;
 	
-	private String cidade;
+	@OneToOne
+	private Cidade cidade;
 	private String bairro;
 	private String cep;
 	private String complemento;
-	
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +49,10 @@ public class Endereco implements Serializable {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 	public String getBairro() {
@@ -72,5 +74,4 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 	}
 	
-
 }

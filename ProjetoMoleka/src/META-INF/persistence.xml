@@ -7,7 +7,10 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     
     <class>br.com.moleka.model.dominio.Pessoa</class>
-    <class>br.com.moleka.model.dominio.Endereco</class>   
+    <class>br.com.moleka.model.dominio.Endereco</class> 
+    <class>br.com.moleka.model.dominio.Pais</class> 
+    <class>br.com.moleka.model.dominio.Estado</class> 
+    <class>br.com.moleka.model.dominio.Cidade</class>   
     <class>br.com.moleka.model.dominio.Produto</class>
 
     

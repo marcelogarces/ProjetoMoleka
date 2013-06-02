@@ -10,7 +10,7 @@
 		
 		<ui:define name="corpo">
 		
-			<h:form id="frmCadastroCliente" >
+			<h:form id="frmCadastroCliente" styleClass="formee" >
 	
 		<p:panel header="Cadastro de Cliente" styleClass="grid-12-12">
 			
@@ -19,7 +19,7 @@
   
 					<p:tab title="Dados Pessoais">
 			
-						<div class="grid-5-12">
+						<div class="grid-5-12" >
 			
 							<niltech:campoTexto id="nome" rotulo="Nome: " valor="#{pessoaBean.pessoa.nome}"  tamanho="50" />
 						</div>
@@ -35,40 +35,40 @@
 						</div>
 			
 			
-						<div class="grid-12-12">
+						<div class="grid-2-12">
 							<niltech:campoMascara id="celular" rotulo="Celular:  " mascara="(99)9999-9999" valor="#{pessoaBean.pessoa.celular}" tamanho="20" />
 						</div>
 			
 				  </p:tab>
 		
 				  <p:tab title="Endereço">
-
-						<div class="grid-3-12">	
-							<niltech:campoMascara id="cep" rotulo="Cep: " mascara="99.999-999" valor="#{pessoaBean.pessoa.endereco.cep}" />
-						</div>	
-			
-						<div class="grid-4-12">
-							<niltech:campoTexto id="bairro" rotulo="Bairro "  valor="#{pessoaBean.pessoa.endereco.bairro}" tamanho="30"   />
-						</div>
-			
-						<div class="grid-5-12">
-							<niltech:campoTexto id="logradouro" rotulo="Logradouro: "  valor="#{pessoaBean.pessoa.endereco.logradouro}" tamanho="50"   />
-						</div>
-			
-						<div class="grid-3-12">
-							<h:outputLabel for="uf" value="UF: " styleClass="formee-lbl" />
-								<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf" styleClass="formee-small" >
+				  
+				  		<div class="grid-3-12">
+							<h:outputLabel for="uf" value="UF: " />
+								<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf" styleClass="formee-medium"  >
+								    <f:ajax render="cidade" event="change" listener="enderecoBean.complete"/>
 									<f:selectItems value="#{enderecoBean.ufList}" var="uf" itemValue="#{uf}" itemLabel="#{uf}" />
 								</p:selectOneMenu>	
 						</div>
-			
-						<div class="grid-9-12">
+				  		<div class="grid-5-12">
 								<h:outputLabel value="Cidade :" for="cidade" >
-								<em class="formee-lbl"></em>
 								</h:outputLabel>
             					<p:autoComplete id="cidade" value="#{pessoaBean.pessoa.endereco.cidade}"   
-                    				completeMethod="#{enderecoBean.complete}" styleClass="formee-txt" />  
+                    				completeMethod="#{enderecoBean.complete}" size="40" />  
 						</div>
+						
+						<div class="grid-4-12">
+							<niltech:campoTexto id="bairro" rotulo="Bairro "  valor="#{pessoaBean.pessoa.endereco.bairro}" tamanho="30"   />
+						</div>
+						
+						<div class="grid-3-12">
+							<niltech:campoTexto id="logradouro" rotulo="Logradouro: "  valor="#{pessoaBean.pessoa.endereco.logradouro}" tamanho="30"   />
+						</div>
+						
+						<div class="grid-3-12">	
+							<niltech:campoMascara id="cep" rotulo="Cep: " mascara="99.999-999" valor="#{pessoaBean.pessoa.endereco.cep}" />
+						</div>	
+		
 				 </p:tab>
 			
 			  </p:tabView>

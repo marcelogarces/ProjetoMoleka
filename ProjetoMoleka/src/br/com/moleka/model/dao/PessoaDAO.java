@@ -83,4 +83,8 @@ public class PessoaDAO implements Serializable {
 		return lista;
 	}
 	
+	public Pessoa obterClienteBalcao(){
+		return (Pessoa) entityManager.createQuery("from Pessoa p where p.nome=:nome").setParameter("nome","Balcão");
+	}
+	
 }

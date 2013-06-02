@@ -23,7 +23,7 @@ public class Item implements Serializable {
 	private Pedido pedido;
 	
 	@ManyToOne
-	private Item item;
+	private Produto produto;
 	
 	private BigDecimal precoUnitario;
 	
@@ -36,6 +36,14 @@ public class Item implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
 
 	public Pedido getPedido() {
 		return pedido;
@@ -43,14 +51,6 @@ public class Item implements Serializable {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
-	}
-
-	public Item getProduto() {
-		return item;
-	}
-
-	public void setProduto(Item item) {
-		this.item = item;
 	}
 
 	public BigDecimal getPrecoUnitario() {

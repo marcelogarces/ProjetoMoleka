@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import br.com.moleka.model.dominio.Produto;
-import br.com.moleka.util.FacesContextUtil;
 
 public class ProdutoDAO implements Serializable {
 	

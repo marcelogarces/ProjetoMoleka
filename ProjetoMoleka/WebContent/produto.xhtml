@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/_tamplete.xhtml">
 	<ui:define name="corpo">
-		<h:form id="frmProduto">
+		<h:form id="frmProduto" styleClass="formee">
 			<p:panel header="Cadastro Produto" styleClass="grid-12-12">
 				<div class="grid-4-12">
 					<niltech:campoTexto rotulo="Descrição"
@@ -22,24 +22,24 @@
 						<f:converter converterId="javax.faces.BigDecimal" />
 					</p:inputText>
 				</div>
+				
 				<div class="grid-4-12">
 					<h:outputLabel id="outputTipo" for="selectTipo"
 						value="Tipo Produto: ">
 						<em class="formee-lbl"></em>
 					</h:outputLabel>
-					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}"
-						panelStyle="width:150px" effect="fold" var="p" style="width:160px"
+					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}" 
+						 effect="fold" var="p" styleClass="formee-small"
 						filter="true" filterMatchMode="startsWith" converter="tipoProduto">
 						<f:selectItem itemLabel="Selecione..." itemValue="" />
 						<f:selectItems value="#{produtoBean.tipoProdutos}"
 							var="tipoProduto" itemLabel="#{tipoProduto.descricao}"
 							itemValue="#{tipoProduto}" />
 						<p:column>
-               						 #{p}
-          					</p:column>
+               				#{p}
+          				</p:column>
 					</p:selectOneMenu>
 				</div>
-				<div class="grid-2-12" />
 				<div class="grid-12-12">
 					<p:commandButton value="Salvar"
 						actionListener="#{produtoBean.salvar}"
