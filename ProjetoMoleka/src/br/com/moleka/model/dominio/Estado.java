@@ -55,8 +55,9 @@ public class Estado implements Serializable {
 		this.pais = pais;
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return  uf;
+	}
 
 }

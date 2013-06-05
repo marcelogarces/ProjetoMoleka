@@ -1,40 +1,38 @@
 package br.com.moleka.managedBean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.persistence.EntityManager;
+
+import br.com.moleka.model.dao.EstadoDAO;
+import br.com.moleka.model.dominio.Estado;
+import br.com.moleka.util.FacesContextUtil;
 
 @ManagedBean
-public class EnderecoBean implements Serializable {
+public class EnderecoBean  {
+
+	private List<Estado> estados;
+	private EntityManager entityManager;
+	private EstadoDAO estadoDAO;
 	
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
-	private String txtCidade;
-
-	public String getTxtCidade() {
-		return txtCidade;
-	}
-
-	public void setTxtCidade(String txtCidade) {
-		this.txtCidade = txtCidade;
-	}
-
-	public List<String> getUfList(){
-		
-		List<String> ufs = new ArrayList<String>();
-			
-			ufs.add("RJ");
-			ufs.add("MG");
-			
-		
-		return ufs;
+	public EnderecoBean(){
+		entityManager = FacesContextUtil.getRequestEntityManager();
+		estadoDAO = new EstadoDAO(entityManager);
+		estados = estadoDAO.listarEstados();
 	}
 	
+	
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}	
 	public List<String> complete(String query){
 		
 		List<String> listCidades = new ArrayList<String>();

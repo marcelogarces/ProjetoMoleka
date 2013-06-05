@@ -21,6 +21,10 @@ public class Cidade implements Serializable{
 	private Long id;
 	private String nome;
 	
+	@Override
+	public String toString() {
+		return "Cidade [nome=" + nome + "]";
+	}
 	@ManyToOne
 	private Estado estado;
 	
