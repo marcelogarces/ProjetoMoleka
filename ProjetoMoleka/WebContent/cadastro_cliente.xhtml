@@ -51,14 +51,15 @@
 
 						<div class="grid-3-12">
 							<h:outputLabel for="uf" value="UF: " />
-							<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf"
+							<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf" 
 								styleClass="formee-medium">
-
 								<f:selectItems value="#{enderecoBean.estados}" var="uf"
 									itemValue="#{uf}" itemLabel="#{uf}" />
+								<f:ajax update="cidade" execute="uf" event="change" listener="#{enderecoBean.teste}"  />		
+							
 							</p:selectOneMenu>
 						</div>
-						<div class="grid-5-12">
+						<div class="grid-5-12" >
 							<h:outputLabel value="Cidade :" for="cidade">
 							</h:outputLabel>
 							<p:autoComplete id="cidade"
