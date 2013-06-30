@@ -14,7 +14,7 @@ import br.com.moleka.util.FacesContextUtil;
 @ManagedBean
 @ViewScoped
 public class ProdutoBean implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -22,8 +22,9 @@ public class ProdutoBean implements Serializable {
 	private ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
-	private List<TipoProduto>tipoProdutos;
+	private List<TipoProduto> tipoProdutos;
 	
+
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
@@ -46,34 +47,41 @@ public class ProdutoBean implements Serializable {
 
 	public void salvar() {
 		produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
-		produtoDAO.salvar(produto);
-		FacesContextUtil.setMensagemInfo("Produto gravado com sucesso.");
+		if(produto.getId() == null){
+			produtoDAO.salvar(produto);
+			FacesContextUtil.setMensagemInfo("Produto gravado com sucesso.");
+		}else{
+			produtoDAO.atualizar(produto);
+			FacesContextUtil.setMensagemInfo("Produto atualizado com sucesso.");
+		}	
 		this.produto = new Produto();
 		this.produtos = produtoDAO.listarTodos();
 	}
-        
-        public void excluir(){
+
+	public void excluir() {
 		produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
-		Produto produto = produtoDAO.obterProdutoPorCodigo(this.produto.getId());
-		if(produto != null){
+		Produto produto = produtoDAO
+				.obterProdutoPorCodigo(this.produto.getId());
+		if (produto != null) {
 			produtoDAO.excluir(produto);
 			FacesContextUtil.setMensagemInfo("Produto removido com sucesso.");
-		}else{
-			FacesContextUtil.setMensagemInfo("Produto excluido por outro usuário.");
+		} else {
+			FacesContextUtil
+					.setMensagemInfo("Produto excluido por outro usuário.");
 		}
-		
+
 		this.produtos = produtoDAO.listarTodos();
 		this.produto = new Produto();
 	}
-	
+
 	public void cancelar() {
-	  produto =  new Produto();
+		produto = new Produto();
 	}
 
-
 	public List<TipoProduto> getTipoProdutos() {
-		TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager());
-		if(tipoProdutos == null){
+		TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(
+				FacesContextUtil.getRequestEntityManager());
+		if (tipoProdutos == null) {
 			this.tipoProdutos = tipoProdutoDAO.listarTodos();
 		}
 		return tipoProdutos;
@@ -82,5 +90,5 @@ public class ProdutoBean implements Serializable {
 	public void setTipoProdutos(List<TipoProduto> tipoProdutos) {
 		this.tipoProdutos = tipoProdutos;
 	}
-}
 
+}

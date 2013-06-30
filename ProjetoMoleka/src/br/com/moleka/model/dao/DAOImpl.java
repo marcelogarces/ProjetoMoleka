@@ -29,8 +29,7 @@ class DAOImpl<T> implements DAO<T>,Serializable {
 
 	@Override
 	public void atualizar(T bean) {
-		// TODO Auto-generated method stub
-		
+		entityManager.merge(bean);
 	}
 
 	@Override

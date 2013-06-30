@@ -1,12 +1,14 @@
 package br.com.moleka.managedBean;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.persistence.EntityManager;
 import br.com.moleka.model.dao.CidadeDAO;
 import br.com.moleka.model.dao.EstadoDAO;
 import br.com.moleka.model.dominio.Cidade;
@@ -15,41 +17,32 @@ import br.com.moleka.util.FacesContextUtil;
 
 @ManagedBean
 @ViewScoped
-public class EnderecoBean  {
+public class EnderecoBean implements Serializable  {
 
-	private List<Estado> estados;
+
+	private static final long serialVersionUID = 1L;
 	private EstadoDAO estadoDAO = new EstadoDAO(FacesContextUtil.getRequestEntityManager());
+	private List<Estado> estados;
 	
+
 	private List<Cidade>cidades = new ArrayList<Cidade>();
 	private Estado estadoSelecionado;
 	private List<String>nomesCidade;
 	
 	
-	public EnderecoBean(){
-		
-		estados = estadoDAO.listarEstados();
+	@PostConstruct
+	public void init() {
+	estados = estadoDAO.listarEstados();
 	}
 	
-	public void teste(AjaxBehaviorEvent event){	
-		
-		//System.out.println("estado selecionado....." +estadoSelecionado);
+	public void listaCidades(AjaxBehaviorEvent event) {
 		CidadeDAO cidadeDAO = new CidadeDAO(FacesContextUtil.getRequestEntityManager());
 		cidades = cidadeDAO.listarCidades();
-		List<String>testes = new ArrayList<String>();
-		
-		
-		for(Cidade cidade : cidades){
-			System.out.println("cidade..." + cidade.getNome());
-			testes.add(cidade.getNome());
-		}
-		
-		nomesCidade = testes;
-		
-		for(String string : nomesCidade){
-			System.out.println("??????  " + string);
-		}
-	}	
+	}
+
+
 	public List<String> complete(String query){
+		
 		return nomesCidade;
 	}
 	

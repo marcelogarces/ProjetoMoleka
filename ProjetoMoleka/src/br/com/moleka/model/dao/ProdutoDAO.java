@@ -28,6 +28,10 @@ public class ProdutoDAO implements Serializable {
 		dao.salvar(produto);
 	}
 	
+	public void atualizar(Produto produto){
+		dao.atualizar(produto);
+	}
+	
 	public void excluir(Produto produto){
 		dao.excluir(produto);
 	}

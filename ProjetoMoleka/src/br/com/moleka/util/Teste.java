@@ -1,8 +1,10 @@
 package br.com.moleka.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
@@ -13,32 +15,31 @@ import br.com.moleka.model.dominio.Pessoa;
 
 public class Teste {
 	
-	private EntityManager em = JPAUtil.getEntityManager();
+	public List<String> nomes = new ArrayList<String>();
+	
+	public Set<String> teste = new TreeSet<String>();
 	
 	
-	public List<Pessoa> listarPessoaPorNomeLike(String str){
-		
-		Query query = em.createQuery("select p from Pessoa p where p.nome like :str");
-		query.setParameter("str", "%" + str + "%");
-		return (List<Pessoa>)query.getResultList();
-
-	}
-	
-	/*
 	public static void main(String[] args) {
 		
 		Teste t = new Teste();
 		
-		PessoaDAO pessoaDAO = new PessoaDAO();
+		t.nomes.add("teste 1");
+		t.nomes.add("teste 2");
+		t.nomes.add("teste 3");
+		t.nomes.add("teste 5");
+		t.nomes.add("teste 5");
 		
-		List<Pessoa> pessoas = pessoaDAO.listaTodosPaginada(1, 10);
- 
-		for(Pessoa p : pessoas){
-				
-			System.out.println("Nome:... " + p.getNome() + "    Cidade:  " + p.getEndereco().getCidade());
+		for(String nome : t.nomes){
+			System.out.println("nome: " + nome);
+		}
 		
+		t.teste.addAll(t.nomes);
+		
+		for(String nome : t.teste){
+			System.out.println("nome.....: " + nome);
 		}
 		
 	}
-*/
+
 }

@@ -19,5 +19,7 @@ public class EstadoDAO {
 	public List<Estado>listarEstados(){
 		return dao.listarTodos();
 	}
+	
+	
 
 }
