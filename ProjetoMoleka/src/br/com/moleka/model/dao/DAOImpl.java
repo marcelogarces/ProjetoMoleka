@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
@@ -45,13 +46,7 @@ class DAOImpl<T> implements DAO<T>,Serializable {
 
 	@Override
 	public List<T> listarTodos() {
-
-		CriteriaQuery<T> query = (CriteriaQuery<T>) entityManager.getCriteriaBuilder().createQuery(classe);
-		query.select((Selection<? extends T>) query.from(classe));
-
-		List<T> lista = entityManager.createQuery(query).getResultList();
-	
-		return lista;
+		return entityManager.createQuery("select o from " + classe.getSimpleName() + " o" + " order by id desc").getResultList();
 	}
 
 	@Override

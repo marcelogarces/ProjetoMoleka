@@ -52,7 +52,7 @@
 			<h:panelGroup id="panelGroupGrid">
 				<p:dataTable value="#{produtoBean.produtos}" var="p"
 					emptyMessage="Nenhum registro encontrado" id="grid"
-					styleClass="grid-12-12" paginator="true" rows="8">
+					styleClass="grid-12-12" paginator="true" rows="5" >
 
 					<p:column headerText="Descrição" width="400">
 						<h:outputText value="#{p.descricao}" />
@@ -62,19 +62,17 @@
 						<h:outputText value="#{p.preco}" />
 					</p:column>
 
-					<p:column headerText="Editar" width="50">
-					
-					
-						<p:commandLink  value="editar" update=":frmProduto">
+					<p:column headerText="Editar" width="50" style="text-align:center">
+						<p:commandLink   update=":frmProduto" >
+							<p:graphicImage library="imagens" name="edit.png" />
 							<f:setPropertyActionListener target="#{produtoBean.produto}" value="#{p}" />
-						</p:commandLink>
-					
-						
+						</p:commandLink>	
 					</p:column>
-					<p:column headerText="Excluir" width="50">
- 							<p:commandButton id="btnExcluirProduto" value="excluir" image="ui-icon ui-icon-close" oncomplete="confirmation.show()" >
- 									<f:setPropertyActionListener target="#{produtoBean.produto}" value="#{p}" />
- 							</p:commandButton>
+					<p:column headerText="Excluir" width="50" style="text-align:center">		
+ 					<p:commandLink id="btnExcluirProduto" oncomplete="confirmation.show()">
+ 						<p:graphicImage library="imagens" name="delete.png"  />
+ 						<f:setPropertyActionListener target="#{produtoBean.produto}" value="#{p}" />
+ 					</p:commandLink >
  					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
