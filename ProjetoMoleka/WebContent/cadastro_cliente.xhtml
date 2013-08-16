@@ -7,13 +7,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/_tamplete.xhtml">
-
 	<ui:define name="corpo">
-
 		<h:form id="frmCadastroCliente" styleClass="formee">
 
 			<p:panel header="Cadastro de Cliente" styleClass="grid-12-12">
-
 
 				<p:tabView id="frmCadastroCliente" styleClass="grid-12-12">
 
@@ -48,23 +45,37 @@
 					</p:tab>
 
 					<p:tab title="Endereço">
-
 						<div class="grid-3-12">
-							<h:outputLabel for="uf" value="UF: " />
-							<p:selectOneMenu value="#{pessoaBean.pessoa.endereco.uf}" id="uf" 
-								styleClass="formee-medium">
-								<f:selectItems value="#{enderecoBean.estados}" var="uf"
-									itemValue="#{uf}" itemLabel="#{uf}" />
-								<f:ajax update="cidade" execute="uf" event="change" listener="#{enderecoBean.teste}"  />		
-							
+							<h:outputLabel for="uf" value="UF: " styleClass="formee-lbl" />
+							<p:selectOneMenu value="#{pessoaBean.estadoSelecionado}" id="uf"
+								effect="fold" var="e" styleClass="formee-medium" filter="true"
+								filterMatchMode="startsWith" converter="estado">
+								<f:selectItem itemLabel="Selecione..." />
+								<f:selectItems value="#{pessoaBean.estados}" var="estado"
+									itemLabel="#{estado.nome}" itemValue="#{estado}" />
+								<p:ajax event="change" update="cidade"
+									listener="#{pessoaBean.listarCidades}" />
+								<p:column>
+               							#{e}
+          							</p:column>
 							</p:selectOneMenu>
+
 						</div>
-						<div class="grid-5-12" >
-							<h:outputLabel value="Cidade :" for="cidade">
-							</h:outputLabel>
-							<p:autoComplete id="cidade"
-								value="#{pessoaBean.pessoa.endereco.cidade}"
-								completeMethod="#{enderecoBean.complete}" size="40" />
+
+
+						<div class="grid-5-12">
+							<h:outputLabel value="Cidade :" for="cidade" />
+							<p:selectOneMenu id="cidade"
+								value="#{pessoaBean.cidadeSelecionada}" effect="fold" var="c"
+								styleClass="formee-medium" filter="true"
+								filterMatchMode="startsWith" converter="cidade">
+								<f:selectItem itemLabel="Selecione..." />
+								<f:selectItems value="#{pessoaBean.cidades}" var="cidade"
+									itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+								<p:column>
+               						#{c}
+          						</p:column>
+							</p:selectOneMenu>
 						</div>
 
 						<div class="grid-4-12">
@@ -111,6 +122,14 @@
 
 					<p:column headerText="E-mail" width="300">
 						<h:outputText value="#{pessoa.email}" />
+					</p:column>
+
+					<p:column headerText="Editar" width="150">
+						<p:commandLink update=":frmCadastroCliente">
+							<p:graphicImage library="imagens" name="edit.png" />
+							<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
+								value="#{pessoa}" />
+						</p:commandLink>
 					</p:column>
 
 					<p:column headerText="Selecionar" width="100">
