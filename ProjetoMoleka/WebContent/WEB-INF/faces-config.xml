@@ -8,6 +8,7 @@
 
 	<lifecycle>
 		<phase-listener>br.com.moleka.listener.DebugListener</phase-listener>
+		<phase-listener>br.com.moleka.listener.OpenSessionEntityManagerInView</phase-listener>
 	</lifecycle>
 
 </faces-config>
