@@ -24,9 +24,12 @@
 	</div>
 
 	<div id="conteudo">
+		
+			
 		<h:form>
 
 			<p:menubar autoDisplay="true" >
+	
 				<p:submenu label="Cadastro">
 					<p:menuitem value="Cliente" url="cadastro_cliente.jsf" />
 					<p:separator />
@@ -44,8 +47,20 @@
 				</p:submenu>
 				
 				<p:menuitem value="Sair" url="#"/>
-				
+						
+				<p:menuitem>
+					<p:ajaxStatus>
+							<f:facet name="start">
+								<h:outputText value=""/>	
+     							<p:graphicImage library="imagens" name="loading.gif" cache="false" style="margin-left: 960px;"   />
+						    </f:facet>
+				            <f:facet name="complete">
+				               <h:outputText value="" />
+				            </f:facet>
+				    </p:ajaxStatus>				
+				</p:menuitem>			
 			</p:menubar>
+			
 		</h:form>
 		<br />
 
