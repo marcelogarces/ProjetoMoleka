@@ -24,8 +24,11 @@ public class PessoaDAO implements Serializable {
 	}
 	
 	public void salvar(Pessoa pessoa) {
-		
 		dao.salvar(pessoa);				
+	}
+	
+	public void atualizar(Pessoa pessoa){
+		dao.atualizar(pessoa);
 	}
 
 	public int contaTodos(Map<String,String> filtros) {

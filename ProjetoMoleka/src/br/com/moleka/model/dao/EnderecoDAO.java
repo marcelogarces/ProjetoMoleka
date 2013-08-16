@@ -18,5 +18,9 @@ public class EnderecoDAO {
 	public void salvar(Endereco endereco){
 		dao.salvar(endereco);	
 	}
+	
+	public void atualizar(Endereco endereco){
+		dao.atualizar(endereco);
+	}
 
 }
