@@ -23,7 +23,7 @@ public class PessoaDAO implements Serializable {
 		dao = new DAOImpl<Pessoa>(Pessoa.class,entityManager);
 	}
 	
-	public void salvar(Pessoa pessoa) {
+	public void salvar(Pessoa pessoa) throws Exception{
 		dao.salvar(pessoa);				
 	}
 	
@@ -81,6 +81,10 @@ public class PessoaDAO implements Serializable {
 	
 	public Pessoa obterClienteBalcao(){
 		return (Pessoa) entityManager.createQuery("from Pessoa p where p.nome=:nome").setParameter("nome","Balcão");
+	}
+	
+	public Pessoa obterPessoaPorCodigo(Long codigo){
+		return dao.getBean(codigo);
 	}
 	
 }

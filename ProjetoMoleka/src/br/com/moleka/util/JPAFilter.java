@@ -28,26 +28,29 @@ public class JPAFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain fc) throws IOException, ServletException {
 		
-		System.out.println("Obtendo Entity Manager da fábrica...");
+		System.out.println("Obtendo Entity Manager da fabrica...");
 		EntityManager entityManager = this.entityManagerFactory.createEntityManager();
 		
 		req.setAttribute("entityManager", entityManager);
-		System.out.println("Iniciando transação........");
+		//System.out.println("Iniciando transacao........");
 		entityManager.getTransaction().begin();
-		System.out.println("Inserindo o entity manager para requisição...");
+		//System.out.println("Inserindo o entity manager para requisisao...");
 		fc.doFilter(req, res);
 		
 		try {
-			System.out.println("Realizando commit na transação...");
+			//System.out.println("Realizando commit na transacao...");
 			entityManager.getTransaction().commit();
 
-		} catch (PersistenceException pe) {
+		} catch (Exception e) {
+			
+			JavaMail.enviarMensagemExcecao(e);
 
-			System.out.println("Ocorreu Erro ou Falha na transação...");
-			System.out.println("Verificando se transação está ativa...");
+			System.out.println("Ocorreu Erro ou Falha na transacao...");
+			System.out.println("Verificando se transacao esta ativa...");
 			if (entityManager.getTransaction().isActive()) {
-				System.out.println("Executando rollback na transação...");
+				System.out.println("Executando rollback na transacao...");
 				entityManager.getTransaction().rollback();
+				
 				// throw new ServletException(pe.toString());
 			}
 		} finally {

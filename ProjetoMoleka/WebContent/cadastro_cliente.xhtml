@@ -12,7 +12,7 @@
 
 			<p:panel header="Cadastro de Cliente" styleClass="grid-12-12">
 
-				<p:tabView id="frmCadastroCliente" styleClass="grid-12-12">
+				<p:tabView id="frmCadastroCliente" styleClass="grid-12-12" binding="#{pessoaBean.tabView}">
 
 					<p:tab title="Dados Pessoais">
 
@@ -47,10 +47,10 @@
 					<p:tab title="Endereço">
 						<div class="grid-3-12">
 							<h:outputLabel for="uf" value="UF: " styleClass="formee-lbl" />
-							<p:selectOneMenu value="#{pessoaBean.estadoSelecionado}" id="uf"
+							<p:selectOneMenu value="#{pessoaBean.estadoSelecionado}" id="uf" 
 								effect="fold" var="e" styleClass="formee-medium" filter="true"
 								filterMatchMode="startsWith" converter="estado">
-								<f:selectItem itemLabel="Selecione..." />
+								<f:selectItem itemLabel="Selecione..." itemValue="" />
 								<f:selectItems value="#{pessoaBean.estados}" var="estado"
 									itemLabel="#{estado.nome}" itemValue="#{estado}" />
 								<p:ajax event="change" update="cidade"
@@ -69,7 +69,7 @@
 								value="#{pessoaBean.cidadeSelecionada}" effect="fold" var="c"
 								styleClass="formee-medium" filter="true"
 								filterMatchMode="startsWith" converter="cidade">
-								<f:selectItem itemLabel="Selecione..." />
+								<f:selectItem itemLabel="Selecione..." itemValue="" />
 								<f:selectItems value="#{pessoaBean.cidades}" var="cidade"
 									itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
 								<p:column>

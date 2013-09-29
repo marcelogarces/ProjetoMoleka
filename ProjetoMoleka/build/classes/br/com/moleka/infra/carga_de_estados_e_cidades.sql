@@ -30,7 +30,7 @@ INSERT INTO `estado` (`id`, `nome`, `uf`, `pais_id`) VALUES
 (26, 'São Paulo', 'SP', 1),
 (27, 'Tocantins', 'TO', 1);
 
-INSERT INTO `estado` (`id`, `nome`, `uf`, `pais`) VALUES
+INSERT INTO `estado` (`id`, `nome`, `uf`, `pais_id`) VALUES
 (1, 'Acre', 'AC', 1),
 (2, 'Alagoas', 'AL', 1),
 (3, 'Amazonas', 'AM', 1),

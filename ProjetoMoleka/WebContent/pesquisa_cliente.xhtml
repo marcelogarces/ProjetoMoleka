@@ -49,6 +49,11 @@
 					<p:column headerText="Selecionar" width="100">
 						<p:commandLink action="#{pesquisaClienteBean.selecionar(pessoa)}"
 							ajax="false" value="selecionar" />
+							-----
+							
+						<h:commandLink action="#{pesquisaClienteBean.iniciarPedido(pessoa)}" value="Pedido" >
+							<f:attribute name="" value=""></f:attribute>
+						</h:commandLink>
 					</p:column>
 				</p:dataTable>
 			</h:panelGroup>

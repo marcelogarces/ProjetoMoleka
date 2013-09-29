@@ -51,7 +51,7 @@ public class Pessoa implements Serializable {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.toUpperCase();
 	}
 	public String getTelefone() {
 		return telefone;
@@ -69,7 +69,7 @@ public class Pessoa implements Serializable {
 		return email;
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.toLowerCase();
 	}
 	public Endereco getEndereco() {
 		return endereco;

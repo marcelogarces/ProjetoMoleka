@@ -1,8 +1,8 @@
 package br.com.moleka.testeUnitario;
 
 import br.com.moleka.servico.Calculo;
-import junit.framework.TestCase;
-
+//import junit.framework.TestCase;
+/*
 public class CalculoTest extends TestCase{
 	
 	public void testExecutarCalculoSoma(){
@@ -21,3 +21,4 @@ public class CalculoTest extends TestCase{
 	}
 
 }
+*/

@@ -10,115 +10,206 @@
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="frmPedido" styleClass="formee">
 
-			<p:panel header="Pedido" styleClass="grid-12-12">
-				<h:panelGroup id="panelGroupGrid">
+			<p:panel header="Pesquisar Cliente" styleClass="grid-12-12"
+				rendered="#{pedidoBean.pedido == null}">
 
-				<div class="grid-12-12">
-						
-						<p:fieldset legend="Picolé" toggleable="true" toggleSpeed="500" collapsed="false" >  
-						
+				<div class="grid-4-12">
+					<niltech:campoTexto valor="#{pedidoBean.nome}" tamanho="50"
+						rotulo="Nome: " />
+				</div>
+				<div class="grid-2-12">
+					<niltech:campoMascara valor="#{pedidoBean.telefone}" tamanho="30"
+						rotulo="Telefone: " mascara="(99)9999-9999" />
+				</div>
+				<div class="grid-2-12" style="margin-top: 30px">
+					<p:commandButton value="Pesquisar"
+						actionListener="#{pedidoBean.pesquisar}"
+						update=":frmPedido :mensagem" />
+				</div>
+
+			</p:panel>
+			<h:panelGroup id="panelGroupGrid"
+				rendered="#{pedidoBean.pedido == null}">
+				<p:dataTable value="#{pedidoBean.pessoas}" var="pessoa"
+					emptyMessage="Nenhum registro encontrado" id="grid"
+					styleClass="grid-12-12" paginator="true" rows="8"
+					rendered="#{pedidoBean.existePessoas}">
+
+					<p:column headerText="Nome" width="400">
+						<h:outputText value="#{pessoa.nome}" />
+					</p:column>
+
+					<p:column headerText="Telefone" width="150">
+						<h:outputText value="#{pessoa.telefone}" />
+					</p:column>
+
+					<p:column headerText="E-mail" width="300">
+						<h:outputText value="#{pessoa.email}" />
+					</p:column>
+
+					<p:column headerText="Pedido" width="100">
+						<p:commandLink value="Iniciar"
+							actionListener="#{pedidoBean.iniciarPedido(pessoa)}"
+							update=":frmPedido :mensagem" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+			<p:panel header="Dados do Cliente" styleClass="grid-12-12"
+				rendered="#{pedidoBean.cliente.id != null}">
+
+				<div class="grid-3-12">
+					<h:outputLabel value="Nome:  ">
+						<h:outputText id="nome" value="#{pedidoBean.cliente.nome}" />
+					</h:outputLabel>
+				</div>
+
+				<div class="grid-2-12">
+					<h:outputLabel value="Telefone:  ">
+						<h:outputText id="telefone" value="#{pedidoBean.cliente.telefone}" />
+					</h:outputLabel>
+				</div>
+
+				<div class="grid-6-12">
+					<h:outputLabel value="Email:   ">
+						<h:outputText id="email" value="#{pedidoBean.cliente.email}" />
+					</h:outputLabel>
+				</div>
+
+
+
+			</p:panel>
+			<p:panel header="Pedido" styleClass="grid-12-12"
+				rendered="#{pedidoBean.pedido != null}">
+				<h:panelGroup id="panelPedido">
+
+					<div class="grid-12-12">
+
+						<p:fieldset legend="Picolé" toggleable="true" toggleSpeed="500"
+							collapsed="false">
+
 							<p:panelGrid columns="16">
-									
-						  				<h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-							   		
-							   		
-									    <h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-								
-								    
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-								
-									
-										
-									    <h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-								
-									
-									
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />	
-									
-									
-										
-										 <h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-									    <h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-										<h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-									    <h:outputText value="Coco"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									
-									
-										
-										<h:outputText value="Goiaba"/>
-										<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />	
-										
-									
-									
+
+								<h:outputText value="#{pedidoBean.itens[0].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[0].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+
+								<h:outputText value="#{pedidoBean.itens[1].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[1].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Coco" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Coco" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Coco" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Coco" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Coco" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
+
+								<h:outputText value="Goiaba" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+
 							</p:panelGrid>
 						</p:fieldset>
-						<br/>
-						
-								<p:fieldset legend="Sorvete Pote" toggleable="true" toggleSpeed="500" collapsed="true" >  
-									
-									<p:panelGrid columns="5">
-									
-									<h:outputText value="Sabor"/>
-									<h:outputText value="Pote 1"/>
-									<h:outputText value="Pote 1"/>
-									<h:outputText value="Pote 1"/>
-									<h:outputText value="Pote 1"/>
 
-									<h:outputText value="Flocos"/>
-									<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-									<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-																
-									</p:panelGrid>
-								
-								</p:fieldset>
-								
-								<div class="grid-6-12">
-								
-								</div>
-								
-								
-								<h1><h:outputText value="Total do pedido: " style="margin-left:800px" /><h:outputText value="R$ 48,00" /></h1>
-								
-								
-				</div>
+
+						<p:fieldset legend="Sorvete Pote" toggleable="true"
+							toggleSpeed="500" collapsed="true">
+
+							<p:panelGrid columns="5">
+
+								<h:outputText value="Sabor" />
+								<h:outputText value="Pote 1" />
+								<h:outputText value="Pote 1" />
+								<h:outputText value="Pote 1" />
+								<h:outputText value="Pote 1" />
+
+								<h:outputText value="Flocos" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
+							</p:panelGrid>
+
+						</p:fieldset>
+
+						<div class="grid-6-12"></div>
+
+
+						<p:panel id="total">
+							<h1>
+								<h:outputText value="Total do pedido: "
+									style="margin-left:750px" />
+								<h:outputText value="#{pedidoBean.valorTotal}">
+									<f:convertNumber currencyCode="BRL" type="currency" />
+								</h:outputText>
+
+							</h1>
+
+						</p:panel>
+						
+						<p:commandButton value="Finalizar Pedido" actionListener="#{pedidoBean.finalizarPedido()}" update=":frmPedido :mensagem"/>
+						
+					</div>
+
+
 
 				</h:panelGroup>
 			</p:panel>

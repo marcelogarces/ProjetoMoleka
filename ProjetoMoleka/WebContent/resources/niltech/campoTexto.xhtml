@@ -11,11 +11,12 @@
 		<cc:attribute name="rotulo" required="true"/>
 		<cc:attribute name="valor"/>
 		<cc:attribute name="tamanho"/>
+		<cc:attribute name="obrigatorio"  />
 	</cc:interface>
 	
 	<cc:implementation>
 		<h:outputLabel for="#{cc.attrs.id}" value="#{cc.attrs.rotulo}">
-		<em class="formee-lbl"></em>
+		
 		</h:outputLabel>
 	    <p:inputText id="#{cc.attrs.id}" value="#{cc.attrs.valor}" size="#{cc.attrs.tamanho}" styleClass="formee-txt" />
 	</cc:implementation>	

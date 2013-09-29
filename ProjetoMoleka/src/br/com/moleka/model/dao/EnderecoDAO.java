@@ -1,11 +1,18 @@
 package br.com.moleka.model.dao;
 
+import java.io.Serializable;
+
 import javax.persistence.EntityManager;
 import br.com.moleka.model.dominio.Endereco;
 
 
-public class EnderecoDAO {
+public class EnderecoDAO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private EntityManager entityManager;
 	
 	private DAO<Endereco> dao; 

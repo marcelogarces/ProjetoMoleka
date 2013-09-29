@@ -9,6 +9,10 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 
+import org.primefaces.component.growl.Growl;
+
+import br.com.moleka.util.JavaMail;
+
 @ManagedBean
 @RequestScoped
 public class Error {
@@ -29,7 +33,9 @@ public class Error {
  
         // Fill the stack trace into the write
         fillStackTrace(ex, pw,context);
- 
+        
+       // JavaMail.enviarMensagemExcecao(ex);
+
         return writer.toString();
     }
  

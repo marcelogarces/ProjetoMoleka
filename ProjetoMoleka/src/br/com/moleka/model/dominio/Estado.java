@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Estado implements Serializable {
@@ -17,7 +19,10 @@ public class Estado implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	@NotEmpty(message="UF é obrigatório")
 	private String nome;
+	
 	private String uf;
 	
 	@ManyToOne

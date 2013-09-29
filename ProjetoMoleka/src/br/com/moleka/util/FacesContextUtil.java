@@ -2,8 +2,10 @@ package br.com.moleka.util;
 
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
 public class FacesContextUtil {
 	
@@ -13,12 +15,20 @@ public class FacesContextUtil {
 	{
 		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put(ENTITY_MANAGER,em);
 	}
-	
+	/*
 	public static EntityManager getRequestEntityManager(){
 		
 		return (EntityManager) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get(ENTITY_MANAGER);
 	}
+	*/
 	
+	
+	public static EntityManager getRequestEntityManager() {
+	        FacesContext fc = FacesContext.getCurrentInstance();
+	        ExternalContext ec = fc.getExternalContext();
+	        HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+	        return (EntityManager) request.getAttribute("entityManager");
+    }
     
 	
 	public static void setMensagemErro(String mensagem) {
@@ -42,5 +52,4 @@ public class FacesContextUtil {
 		FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, outcome);
 	}
 
-  
 }

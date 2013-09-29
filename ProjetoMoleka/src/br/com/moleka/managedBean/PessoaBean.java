@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.persistence.EntityManager;
+import org.apache.log4j.Logger;
+import org.primefaces.component.tabview.TabView;
 import br.com.moleka.model.dao.CidadeDAO;
 import br.com.moleka.model.dao.EnderecoDAO;
 import br.com.moleka.model.dao.EstadoDAO;
@@ -39,11 +41,22 @@ public class PessoaBean implements Serializable {
 	private Estado estadoSelecionado;
 	private Cidade cidadeSelecionada;
 	
+	private TabView tabView;
+	
+	private static final int ABA_CADASTRO = 0;
+	
 
-	public PessoaBean(){	
+	public PessoaBean(){
+		
+		Logger logger = Logger.getLogger(PessoaBean.class);
+		
+		logger.info("pegando entity manager da requisicao...");
 		entityManager = FacesContextUtil.getRequestEntityManager();
+		logger.info("instanciando pessoaDAO...");
 		pessoaDAO = new PessoaDAO(entityManager);
+		logger.info("setando endereço na pessoa...");
 		pessoa.setEndereco(new Endereco());
+		logger.info("pegando todas as pessoas...");
 		pessoas = pessoaDAO.listarTodasPessoas();
 	}
 	
@@ -54,14 +67,14 @@ public class PessoaBean implements Serializable {
 	}
 	
 
-	public void listarCidades(AjaxBehaviorEvent event) {	
+	public void listarCidades(AjaxBehaviorEvent event) {
+			
 		CidadeDAO cidadeDAO = new CidadeDAO(FacesContextUtil.getRequestEntityManager());
 		estadoDAO = new EstadoDAO(FacesContextUtil.getRequestEntityManager());	
-		System.out.println("estado selecionado e........" + estadoSelecionado);
 		cidades = cidadeDAO.obterCidadePorEstado(estadoSelecionado);
 	}
 	
-	public void salvar(){
+	public void salvar() throws Exception{
 		
 		EntityManager entityManagerRequisicao = FacesContextUtil.getRequestEntityManager();
 		enderecoDAO = new EnderecoDAO(entityManagerRequisicao);
@@ -69,18 +82,27 @@ public class PessoaBean implements Serializable {
 		pessoa.getEndereco().setCidade(cidadeSelecionada);
 		
 		if(pessoa.getId() == null){
+			
 			enderecoDAO.salvar(pessoa.getEndereco());
+			
 			pessoaDAO.salvar(pessoa);	
+			
 			FacesContextUtil.setMensagemInfo("Registro salvo com sucesso");
 		}else{
 			pessoaDAO.atualizar(pessoa);
 			enderecoDAO.atualizar(pessoa.getEndereco());
 			FacesContextUtil.setMensagemInfo("Registro atualizado com sucesso.");
 		}
+		
 		pessoa = new Pessoa();
 		estadoSelecionado = new Estado();
 		cidadeSelecionada = new Cidade();
 		pessoas = pessoaDAO.listarTodasPessoas();
+		
+		tabView.setActiveIndex(ABA_CADASTRO);
+		tabView.setEffect("fade");
+		
+	
 	}
 
 	public Pessoa getPessoa() {
@@ -136,6 +158,13 @@ public class PessoaBean implements Serializable {
 	public void setCidadeSelecionada(Cidade cidadeSelecionada) {
 		this.cidadeSelecionada = cidadeSelecionada;
 	}
-	
+
+	public TabView getTabView() {
+		return tabView;
+	}
+
+	public void setTabView(TabView tabView) {
+		this.tabView = tabView;
+	}
 	
 }

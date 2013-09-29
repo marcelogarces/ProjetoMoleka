@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Endereco implements Serializable {
@@ -21,10 +23,15 @@ public class Endereco implements Serializable {
 	@NotEmpty(message="Logradouro é obrigatório")
 	private String logradouro;
 	
+	@NotNull(message="Cidade é obrigatório") 
 	@OneToOne
 	private Cidade cidade;
+	
+	@NotEmpty(message="Bairro é obrigatório")
 	private String bairro;
+	
 	private String cep;
+	
 	private String complemento;
 	
 	public Long getId() {
@@ -37,7 +44,7 @@ public class Endereco implements Serializable {
 		return logradouro;
 	}
 	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+		this.logradouro = logradouro.toUpperCase();
 	}
 	
 	public Cidade getCidade() {
@@ -50,7 +57,7 @@ public class Endereco implements Serializable {
 		return bairro;
 	}
 	public void setBairro(String bairro) {
-		this.bairro = bairro;
+		this.bairro = bairro.toUpperCase();
 	}
 	public String getCep() {
 		return cep;
@@ -62,7 +69,7 @@ public class Endereco implements Serializable {
 		return complemento;
 	}
 	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+		this.complemento = complemento.toUpperCase();
 	}
 	
 }

@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,13 +19,14 @@ public class Cidade implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String nome;
 	
 	@Override
 	public String toString() {
 		return  nome;
 	}
-	@ManyToOne
+	@ManyToOne	
 	private Estado estado;
 	
 	
@@ -48,6 +48,8 @@ public class Cidade implements Serializable{
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

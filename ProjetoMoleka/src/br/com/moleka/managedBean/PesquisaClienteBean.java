@@ -1,9 +1,11 @@
 package br.com.moleka.managedBean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -13,10 +15,12 @@ import br.com.moleka.model.dao.PessoaDAO;
 import br.com.moleka.model.dominio.Pessoa;
 import br.com.moleka.util.FacesContextUtil;
 
+
 @ManagedBean
 @ViewScoped
 public class PesquisaClienteBean implements Serializable {
 		
+
 		private static final long serialVersionUID = 1L;
 		private String nomePesq;
 		private String telefonePesq;
@@ -37,18 +41,17 @@ public class PesquisaClienteBean implements Serializable {
 		}
 		
 		public void pesquisar(){
-			System.out.println("teledfone....." + telefonePesq);
 			PessoaDAO pessoaDAO = new PessoaDAO(FacesContextUtil.getRequestEntityManager());
-			System.out.println("acao pesquisar.....");
 			pessoas = pessoaDAO.listarPessoaPorNomeETelefoneLike(nomePesq,telefonePesq);
 			if(!pessoas.isEmpty()){
 			existePessoas = true;
 			}else{
-				System.out.println("nao existe registro");
 				FacesContext.getCurrentInstance().addMessage("sdsdsd",new FacesMessage("Nenhum registro encontrado"));
 			}
 		}
-		public String selecionar(Pessoa pessoa){
+		public String selecionar(Pessoa pessoa) throws IOException{
+			System.out.println("pppppppppppppppppppp");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("menu.jsf");  
 			return "menu.xhtml";
 		}
 

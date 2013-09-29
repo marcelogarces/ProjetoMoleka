@@ -21,9 +21,9 @@
       <property name="javax.persistence.jdbc.password" value="1955"/>
       
   
-      <property name="hibernate.hbm2ddl.auto" value="update"/> 
+      <property name="hibernate.hbm2ddl.auto" value="updade"/> 
       <property name="hibernate.show_sql" value="true" />
-      <property name="hibernate.format_sql" value="false" />
+      <property name="hibernate.format_sql" value="true" />
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
     </properties>
   </persistence-unit>

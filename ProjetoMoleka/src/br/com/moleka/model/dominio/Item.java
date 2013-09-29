@@ -27,7 +27,7 @@ public class Item implements Serializable {
 	
 	private BigDecimal precoUnitario;
 	
-	private Integer quantidade;
+	private Integer quantidade = 0;
 
 	public Long getId() {
 		return id;
