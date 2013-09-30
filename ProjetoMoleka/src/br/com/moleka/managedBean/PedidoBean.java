@@ -101,17 +101,12 @@ public class PedidoBean implements Serializable{
 	private List<Item> gerarItens(Pedido pedido){
 		
 		ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
-		
-		TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager()); 
-		
-		TipoProduto picole = tipoProdutoDAO.obterTipoProdutoPorCodigo(2L);
-		
-		List<Produto> produtoTipoPicole = produtoDAO.obterTodosProdutosPorTipo(picole);
+		List<Produto> todosProdutos = produtoDAO.findAll();
 		
 		
 		itens = new ArrayList<Item>();
 		
-		for(Produto produto : produtoTipoPicole){
+		for(Produto produto : todosProdutos){
 			
 			Item item = new Item();
 			item.setPedido(pedido);

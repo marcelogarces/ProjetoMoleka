@@ -50,5 +50,11 @@ public class ProdutoDAO implements Serializable {
 		return produtos;
 		
 	}
+	
+	public List<Produto>findAll(){
+		TypedQuery<Produto> query = entityManager.createQuery("from Produto",Produto.class);
+		return query.getResultList();
+		
+	}
 
 }

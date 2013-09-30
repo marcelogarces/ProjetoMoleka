@@ -386,18 +386,26 @@
 
 
 						<p:fieldset legend="Sorvete Pote" toggleable="true"
-							toggleSpeed="500" collapsed="true">
+							toggleSpeed="500" >
 
 							<p:panelGrid columns="5">
 
 								<h:outputText value="Sabor" />
-								<h:outputText value="Pote 1" />
-								<h:outputText value="Pote 1" />
-								<h:outputText value="Pote 1" />
-								<h:outputText value="Pote 1" />
+								<h:outputText value="Pote 1L" />
+								<h:outputText value="Pote 2L" />
+								<h:outputText value="Pote 5L" />
+								<h:outputText value="Pote 7L" />
 
-								<h:outputText value="Flocos" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+								<h:outputText value="#{pedidoBean.itens[29].produto.descricao}" />
+								
+								<h:outputLabel value="Qtd">
+								<p:inputText value="#{pedidoBean.itens[29].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+				
 								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
 								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
 								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
