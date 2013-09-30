@@ -13,10 +13,12 @@ import javax.faces.context.FacesContext;
 import br.com.moleka.model.dao.PedidoDAO;
 import br.com.moleka.model.dao.PessoaDAO;
 import br.com.moleka.model.dao.ProdutoDAO;
+import br.com.moleka.model.dao.TipoProdutoDAO;
 import br.com.moleka.model.dominio.Item;
 import br.com.moleka.model.dominio.Pedido;
 import br.com.moleka.model.dominio.Pessoa;
 import br.com.moleka.model.dominio.Produto;
+import br.com.moleka.model.dominio.TipoProduto;
 import br.com.moleka.util.FacesContextUtil;
 
 
@@ -100,27 +102,25 @@ public class PedidoBean implements Serializable{
 		
 		ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
 		
+		TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager()); 
+		
+		TipoProduto picole = tipoProdutoDAO.obterTipoProdutoPorCodigo(2L);
+		
+		List<Produto> produtoTipoPicole = produtoDAO.obterTodosProdutosPorTipo(picole);
+		
+		
 		itens = new ArrayList<Item>();
 		
-		Item picoleCocoItem = new Item();
-		
-		picoleCocoItem.setPedido(pedido);
-		Produto p1 = produtoDAO.obterProdutoPorCodigo(1L);
-		picoleCocoItem.setProduto(p1);
-		picoleCocoItem.setPrecoUnitario(p1.getPreco());
-		
-		itens.add(picoleCocoItem);
-		
-		System.out.println(itens.get(0).getQuantidade());
-		
-		Item picoleMilhoItem = new Item();
-		picoleMilhoItem.setPedido(pedido);
-		Produto p2 = produtoDAO.obterProdutoPorCodigo(2L);
-		picoleMilhoItem.setProduto(p2);
-		picoleMilhoItem.setPrecoUnitario(p2.getPreco());
-
-		itens.add(picoleMilhoItem);
-		
+		for(Produto produto : produtoTipoPicole){
+			
+			Item item = new Item();
+			item.setPedido(pedido);
+			item.setProduto(produto);
+			item.setPrecoUnitario(produto.getPreco());
+			
+			itens.add(item);
+		}
+				
 		return itens;
 	}
 

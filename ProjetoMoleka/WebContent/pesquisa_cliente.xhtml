@@ -10,7 +10,7 @@
 
 	<ui:define name="corpo">
 
-		<h:form id="frmPesquisaCliente">
+		<h:form id="frmPesquisaCliente" styleClass="formee">
 
 			<p:panel header="Pesquisar Cliente" styleClass="grid-12-12">
 
@@ -22,7 +22,7 @@
 					<niltech:campoMascara valor="#{pesquisaClienteBean.telefonePesq}"
 						tamanho="30" rotulo="Telefone: " mascara="(99)9999-9999" />
 				</div>
-				<div class="grid-2-12" style="margin-top: 20px">
+				<div class="grid-2-12" style="margin-top: 30px">
 					<p:commandButton value="Pesquisar"
 						actionListener="#{pesquisaClienteBean.pesquisar}" update=":frmPesquisaCliente :mensagem" />
 				</div>
@@ -46,15 +46,6 @@
 						<h:outputText value="#{pessoa.email}" />
 					</p:column>
 
-					<p:column headerText="Selecionar" width="100">
-						<p:commandLink action="#{pesquisaClienteBean.selecionar(pessoa)}"
-							ajax="false" value="selecionar" />
-							-----
-							
-						<h:commandLink action="#{pesquisaClienteBean.iniciarPedido(pessoa)}" value="Pedido" >
-							<f:attribute name="" value=""></f:attribute>
-						</h:commandLink>
-					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
 		</h:form>

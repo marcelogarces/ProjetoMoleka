@@ -49,10 +49,12 @@
 						<h:outputText value="#{pessoa.email}" />
 					</p:column>
 
-					<p:column headerText="Pedido" width="100">
-						<p:commandLink value="Iniciar"
+					<p:column headerText="Pedido" width="100" style="text-align:center">
+						<p:commandLink 
 							actionListener="#{pedidoBean.iniciarPedido(pessoa)}"
-							update=":frmPedido :mensagem" />
+							update=":frmPedido :mensagem" title="Iniciar pedido"  >
+							<h:graphicImage library="imagens" name="pedido.png"  />
+						</p:commandLink>
 					</p:column>
 				</p:dataTable>
 			</h:panelGroup>
@@ -109,62 +111,276 @@
 											update="total" />
 									</p:inputText>
 								</h:outputLabel>
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Coco" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Coco" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Coco" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Coco" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Coco" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
-
-								<h:outputText value="Goiaba" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-
-
+								
+								<h:outputText value="#{pedidoBean.itens[2].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[2].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[3].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[3].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[4].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[4].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[5].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[5].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[6].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[6].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[7].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[7].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[8].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[8].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[9].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[9].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[10].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[10].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[11].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[11].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[12].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[12].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[13].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[13].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[14].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[14].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[15].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[15].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[16].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[16].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[17].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[17].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[18].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[18].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[19].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[19].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[20].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[20].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[21].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[21].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[22].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[22].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[23].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[23].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[24].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[24].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[25].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[25].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[26].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[26].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[27].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[27].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+																
+								<h:outputText value="#{pedidoBean.itens[28].produto.descricao}" />
+								<h:outputLabel value="Qtd">
+									<p:inputText value="#{pedidoBean.itens[28].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
 							</p:panelGrid>
 						</p:fieldset>
 
@@ -205,11 +421,12 @@
 
 						</p:panel>
 						
-						<p:commandButton value="Finalizar Pedido" actionListener="#{pedidoBean.finalizarPedido()}" update=":frmPedido :mensagem"/>
-						
+			
 					</div>
 
-
+					<div style="text-align:right">
+						<p:commandButton value="Finalizar Pedido" actionListener="#{pedidoBean.finalizarPedido()}" update=":frmPedido :mensagem" />
+					</div>	
 
 				</h:panelGroup>
 			</p:panel>

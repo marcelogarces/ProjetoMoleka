@@ -3,7 +3,10 @@ package br.com.moleka.model.dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import br.com.moleka.model.dominio.Produto;
+import br.com.moleka.model.dominio.TipoProduto;
 
 public class ProdutoDAO implements Serializable {
 	
@@ -38,6 +41,14 @@ public class ProdutoDAO implements Serializable {
 	
 	public Produto obterProdutoPorCodigo(Long id){
 		return dao.getBean(id);
+	}
+	
+	public List<Produto>obterTodosProdutosPorTipo(TipoProduto tipoProduto){
+		TypedQuery<Produto> query = entityManager.createQuery("from Produto p where p.tipoProduto= :tipoProduto",Produto.class);
+		query.setParameter("tipoProduto", tipoProduto);
+		List<Produto> produtos = query.getResultList();
+		return produtos;
+		
 	}
 
 }

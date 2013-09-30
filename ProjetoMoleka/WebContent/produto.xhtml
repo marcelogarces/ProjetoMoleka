@@ -19,7 +19,7 @@
 						<em class="formee-lbl"></em>
 					</h:outputLabel>
 					<p:inputText value="#{produtoBean.produto.preco}" id="inputProduto">
-						<f:converter converterId="javax.faces.BigDecimal" />
+						<f:converter converterId="javax.faces.BigDecimal"  />
 					</p:inputText>
 				</div>
 				
@@ -29,7 +29,7 @@
 						<em class="formee-lbl"></em>
 					</h:outputLabel>
 					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}" 
-						 effect="fold" var="p" styleClass="formee-small"
+						 effect="fold" var="p" style="width:150px"
 						filter="true" filterMatchMode="startsWith" converter="tipoProduto">
 						<f:selectItem itemLabel="Selecione..." itemValue="" />
 						<f:selectItems value="#{produtoBean.tipoProdutos}"
@@ -54,12 +54,18 @@
 					emptyMessage="Nenhum registro encontrado" id="grid"
 					styleClass="grid-12-12" paginator="true" rows="5" >
 
+					<p:column headerText="Tipo Produto" width="200">
+						<h:outputText value="#{p.tipoProduto}" />
+					</p:column>
+					
 					<p:column headerText="Descrição" width="400">
 						<h:outputText value="#{p.descricao}" />
 					</p:column>
 
 					<p:column headerText="Preço " width="150">
-						<h:outputText value="#{p.preco}" />
+						<h:outputText value="#{p.preco}" >
+						<f:convertNumber currencyCode="BRL" type="currency"/>
+						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Editar" width="50" style="text-align:center">
