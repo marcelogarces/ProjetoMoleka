@@ -10,7 +10,7 @@
 
 	<ui:define name="corpo">
 
-		<h:form id="frmPedido" styleClass="formee">
+		<h:form id="frmPedido" styleClass="formee" target="_blank">
 
 			<p:panel header="Pesquisar Cliente" styleClass="grid-12-12"
 				rendered="#{pedidoBean.pedido == null}">
@@ -83,8 +83,9 @@
 
 
 			</p:panel>
+			
 			<p:panel header="Pedido" styleClass="grid-12-12"
-				rendered="#{pedidoBean.pedido != null}">
+				rendered="#{pedidoBean.pedido != null}" style="margin-top:10px" >
 				<h:panelGroup id="panelPedido">
 
 					<div class="grid-12-12">
@@ -399,6 +400,34 @@
 								<h:outputText value="#{pedidoBean.itens[29].produto.descricao}" />
 								
 								<h:outputLabel value="Qtd">
+								<!-- quantidade de pote de 1L -->
+								<p:inputText value="#{pedidoBean.itens[29].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+								<h:outputLabel value="Qtd">
+								<!-- quantidade de pote de 2L -->
+								<p:inputText value="#{pedidoBean.itens[29].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+								<h:outputLabel value="Qtd">
+								<!-- quantidade de pote de 5L -->
+								<p:inputText value="#{pedidoBean.itens[29].quantidade}" size="1"
+										styleClass="formee-txt">
+										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
+											update="total" />
+									</p:inputText>
+								</h:outputLabel>
+								
+								<h:outputLabel value="Qtd">
+								<!-- quantidade de pote de 7L -->
 								<p:inputText value="#{pedidoBean.itens[29].quantidade}" size="1"
 										styleClass="formee-txt">
 										<p:ajax event="keyup" listener="#{pedidoBean.calcularTotal()}"
@@ -406,9 +435,7 @@
 									</p:inputText>
 								</h:outputLabel>
 				
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
-								<niltech:campoTexto rotulo="Qtd" value="" tamanho="1" />
+
 
 							</p:panelGrid>
 
@@ -433,7 +460,7 @@
 					</div>
 
 					<div style="text-align:right">
-						<p:commandButton value="Finalizar Pedido" actionListener="#{pedidoBean.finalizarPedido()}" update=":frmPedido :mensagem" />
+						<p:commandButton value="Finalizar Pedido" action="#{pedidoBean.finalizarPedido()}" ajax="false"   />
 					</div>	
 
 				</h:panelGroup>
