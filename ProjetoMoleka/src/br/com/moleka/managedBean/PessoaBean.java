@@ -13,10 +13,12 @@ import br.com.moleka.model.dao.CidadeDAO;
 import br.com.moleka.model.dao.EnderecoDAO;
 import br.com.moleka.model.dao.EstadoDAO;
 import br.com.moleka.model.dao.PessoaDAO;
+import br.com.moleka.model.dao.TipoLogradouroDAO;
 import br.com.moleka.model.dominio.Cidade;
 import br.com.moleka.model.dominio.Endereco;
 import br.com.moleka.model.dominio.Estado;
 import br.com.moleka.model.dominio.Pessoa;
+import br.com.moleka.model.dominio.TipoLogradouro;
 import br.com.moleka.util.FacesContextUtil;
 
 
@@ -30,16 +32,19 @@ public class PessoaBean implements Serializable {
 	
 	private Pessoa pessoa = new Pessoa();
 	
-	private  PessoaDAO pessoaDAO;
+	private PessoaDAO pessoaDAO;
 	private EstadoDAO estadoDAO;
 	private EnderecoDAO enderecoDAO;
+	private TipoLogradouroDAO tipoLogradouroDAO;
 	
 	private List<Pessoa> pessoas;
 	private List<Estado> estados;
 	private List<Cidade> cidades;
+	private List<TipoLogradouro>tipoLogradouros;
 	
 	private Estado estadoSelecionado;
 	private Cidade cidadeSelecionada;
+	private TipoLogradouro tipoLogradouroSelecionado;
 	
 	private TabView tabView;
 	
@@ -58,6 +63,10 @@ public class PessoaBean implements Serializable {
 		pessoa.setEndereco(new Endereco());
 		logger.info("pegando todas as pessoas...");
 		pessoas = pessoaDAO.listarTodasPessoas();
+		
+		tipoLogradouroDAO = new TipoLogradouroDAO(entityManager);
+		logger.info("pegando todos os tipos de logradouros...");
+		tipoLogradouros = tipoLogradouroDAO.listarTodos();
 	}
 	
 	@PostConstruct
@@ -80,6 +89,7 @@ public class PessoaBean implements Serializable {
 		enderecoDAO = new EnderecoDAO(entityManagerRequisicao);
 		pessoaDAO = new PessoaDAO(entityManagerRequisicao);
 		pessoa.getEndereco().setCidade(cidadeSelecionada);
+		pessoa.getEndereco().setTipoLogradouro(tipoLogradouroSelecionado);
 		
 		if(pessoa.getId() == null){
 			
@@ -118,6 +128,7 @@ public class PessoaBean implements Serializable {
 			CidadeDAO cidadeDAO = new CidadeDAO(FacesContextUtil.getRequestEntityManager());
 			cidadeSelecionada = pessoa.getEndereco().getCidade();
 			estadoSelecionado = pessoa.getEndereco().getCidade().getEstado();
+			tipoLogradouroSelecionado = pessoa.getEndereco().getTipoLogradouro();
 			cidades = cidadeDAO.obterCidadePorEstado(estadoSelecionado);
 		}
 		return pessoas;
@@ -165,6 +176,23 @@ public class PessoaBean implements Serializable {
 
 	public void setTabView(TabView tabView) {
 		this.tabView = tabView;
+	}
+
+	public List<TipoLogradouro> getTipoLogradouros() {
+		return tipoLogradouros;
+	}
+
+	public void setTipoLogradouros(List<TipoLogradouro> tipoLogradouros) {
+		this.tipoLogradouros = tipoLogradouros;
+	}
+	
+	public TipoLogradouro getTipoLogradouroSelecionado() {
+		return tipoLogradouroSelecionado;
+	}
+
+	public void setTipoLogradouroSelecionado(
+			TipoLogradouro tipoLogradouroSelecionado) {
+		this.tipoLogradouroSelecionado = tipoLogradouroSelecionado;
 	}
 	
 }

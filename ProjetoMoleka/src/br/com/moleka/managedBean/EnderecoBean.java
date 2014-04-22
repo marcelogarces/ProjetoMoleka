@@ -31,8 +31,6 @@ public class EnderecoBean implements Serializable {
 
 		CidadeDAO cidadeDAO = new CidadeDAO(FacesContextUtil.getRequestEntityManager());
 		estadoDAO = new EstadoDAO(FacesContextUtil.getRequestEntityManager());
-
-		System.out.println("estado selecionado e........" + estadoSelecionado);
 		Estado estado = estadoDAO.obterEstadoPorId(20L);
 		cidades = cidadeDAO.obterCidadePorEstado(estado);
 	}

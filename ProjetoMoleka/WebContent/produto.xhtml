@@ -28,7 +28,7 @@
 						value="Tipo Produto: ">
 						<em class="formee-lbl"></em>
 					</h:outputLabel>
-					<p:selectOneMenu value="#{produtoBean.produto.tipoProduto}" 
+					<p:selectOneMenu id="selectTipo" value="#{produtoBean.produto.tipoProduto}" 
 						 effect="fold" var="p" style="width:150px"
 						filter="true" filterMatchMode="startsWith" converter="tipoProduto">
 						<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -52,7 +52,7 @@
 			<h:panelGroup id="panelGroupGrid">
 				<p:dataTable value="#{produtoBean.produtos}" var="p"
 					emptyMessage="Nenhum registro encontrado" id="grid"
-					styleClass="grid-12-12" paginator="true" rows="5" >
+					styleClass="grid-12-12" paginator="true" rows="10" >
 
 					<p:column headerText="Tipo Produto" width="200">
 						<h:outputText value="#{p.tipoProduto}" />

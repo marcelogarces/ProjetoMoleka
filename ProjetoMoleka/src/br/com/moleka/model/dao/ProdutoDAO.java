@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import br.com.moleka.model.dominio.Produto;
 import br.com.moleka.model.dominio.TipoProduto;
 
@@ -51,10 +50,20 @@ public class ProdutoDAO implements Serializable {
 		
 	}
 	
+	public Produto obterFrete(){
+		return dao.getBean(129L);
+	}
+	
 	public List<Produto>findAll(){
 		TypedQuery<Produto> query = entityManager.createQuery("from Produto",Produto.class);
 		return query.getResultList();
 		
+	}
+	
+	public void atualizarPrecoPorTipo(TipoProduto tipoProduto){
+		//TODO terminar de fazer metodo para alterar preco do produto.
+		
+		entityManager.merge("from Produto p where p.tipoProduto=:tipoProduto");
 	}
 
 }

@@ -2,7 +2,6 @@ package br.com.moleka.model.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import br.com.moleka.model.dominio.Produto;
 import br.com.moleka.model.dominio.TipoProduto;
 
 public class TipoProdutoDAO {

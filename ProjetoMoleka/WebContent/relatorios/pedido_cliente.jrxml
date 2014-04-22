@@ -24,11 +24,38 @@
 	<field name="valorTotal" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[pedido.valorTotal]]></fieldDescription>
 	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.nome]]></fieldDescription>
+	</field>
+	<field name="tipoLogradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.tipoLogradouro.descricao]]></fieldDescription>
+	</field>
+	<field name="logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.logradouro]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.numero]]></fieldDescription>
+	</field>
+	<field name="complemento" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.complemento]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.bairro]]></fieldDescription>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.cidade.nome]]></fieldDescription>
+	</field>
+	<field name="pontoReferencia" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.endereco.pontoReferencia]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[pedido.cliente.nome]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="78" splitType="Stretch">
+		<band height="75" splitType="Stretch">
 			<staticText>
 				<reportElement x="264" y="1" width="90" height="30"/>
 				<textElement>
@@ -36,10 +63,6 @@
 				</textElement>
 				<text><![CDATA[Pedido]]></text>
 			</staticText>
-			<image>
-				<reportElement x="4" y="3" width="170" height="69"/>
-				<imageExpression><![CDATA["/Users/marcelogarces/Documents/workspace/ProjetoMoleka/ProjetoMoleka/WebContent/resources/imagens/logo.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="148" y="31" width="340" height="42"/>
 				<textElement textAlignment="Center">
@@ -55,10 +78,88 @@ Av Roberto Silveira, 1456 - Centro - Nilópolis - RJ]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="2" y="3" width="141" height="70"/>
+				<imageExpression><![CDATA["/Users/marcelogarces/Documents/workspace/ProjetoMoleka/ProjetoMoleka/WebContent/resources/imagens/logo.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="10" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="5" width="553" height="70"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="24" y="-1" width="90" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dados do Cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="45" y="13" width="238" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="34" width="51" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tipoLogradouro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="35" width="222" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="35" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="54" width="94" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="13" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="35" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Número:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="54" width="72" height="20"/>
+				<textElement/>
+				<text><![CDATA[Complemento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="54" width="39" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cidade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="367" y="54" width="117" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="179" y="54" width="39" height="20"/>
+				<textElement/>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="54" width="106" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="34" width="53" height="20"/>
+				<textElement/>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="22" splitType="Stretch">
@@ -183,7 +284,7 @@ Av Roberto Silveira, 1456 - Centro - Nilópolis - RJ]]></text>
 		<band height="8" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="33" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
 				<reportElement x="24" y="10" width="502" height="20"/>
 				<textElement textAlignment="Center">
@@ -197,21 +298,31 @@ Av Roberto Silveira, 1456 - Centro - Nilópolis - RJ]]></text>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="24" splitType="Stretch">
+		<band height="51" splitType="Stretch">
 			<textField pattern="¤ #,##0.00">
-				<reportElement x="411" y="2" width="144" height="20"/>
+				<reportElement x="443" y="30" width="112" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="320" y="2" width="90" height="20"/>
+				<reportElement x="356" y="30" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Valor Total:.]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="1" y="2" width="110" height="20"/>
+				<textElement/>
+				<text><![CDATA[Ponto de Referência:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="104" y="2" width="441" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pontoReferencia}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

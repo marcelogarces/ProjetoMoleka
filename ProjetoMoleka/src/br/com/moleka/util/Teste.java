@@ -1,45 +1,45 @@
 package br.com.moleka.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import br.com.moleka.model.dao.PessoaDAO;
-import br.com.moleka.model.dominio.Pessoa;
-
 public class Teste {
 	
-	public List<String> nomes = new ArrayList<String>();
+	public static int[] inverter(int valores[],int quantidade){
+		
+		int valoresInvertidos [] = new int[quantidade];
+		
+		for(int i=0; i < valores.length; i++){
+			
+				valoresInvertidos[i] = valores[quantidade - 1];
+				
+			quantidade +=-1;
+		}
+		
+		return valoresInvertidos;
+	}
 	
-	public Set<String> teste = new TreeSet<String>();
-	
-	
+	public static int[] inverter(int valores[]){
+		
+		int tamanhoVetor = valores.length;
+		int valoresInvertidos [] = new int[tamanhoVetor];
+			
+		for(int i=0; i < valores.length; i++){	
+				valoresInvertidos[i] = valores[tamanhoVetor - 1];			
+				tamanhoVetor +=-1;
+		}
+		
+		return valoresInvertidos;
+	}
+
 	public static void main(String[] args) {
 		
-		Teste t = new Teste();
+		int valores [] = {1,2,3,4,5,6};
 		
-		t.nomes.add("teste 1");
-		t.nomes.add("teste 2");
-		t.nomes.add("teste 3");
-		t.nomes.add("teste 5");
-		t.nomes.add("teste 5");
+		int valoresInvertidos[] = Teste.inverter(valores);
 		
-		for(String nome : t.nomes){
-			System.out.println("nome: " + nome);
+		for(int i=0; i < valoresInvertidos.length; i++){
+			
+			System.out.println(valoresInvertidos[i]);
 		}
-		
-		t.teste.addAll(t.nomes);
-		
-		for(String nome : t.teste){
-			System.out.println("nome.....: " + nome);
-		}
-		
+
 	}
 
 }

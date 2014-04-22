@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,6 +21,9 @@ public class Endereco implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@ManyToOne
+	private TipoLogradouro tipoLogradouro;
+	
 	@NotEmpty(message="Logradouro é obrigatório")
 	private String logradouro;
 	
@@ -32,7 +36,11 @@ public class Endereco implements Serializable {
 	
 	private String cep;
 	
+	private Integer numero;
+	
 	private String complemento;
+	
+	private String pontoReferencia;
 	
 	public Long getId() {
 		return id;
@@ -70,6 +78,24 @@ public class Endereco implements Serializable {
 	}
 	public void setComplemento(String complemento) {
 		this.complemento = complemento.toUpperCase();
+	}
+	public TipoLogradouro getTipoLogradouro() {
+		return tipoLogradouro;
+	}
+	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
+		this.tipoLogradouro = tipoLogradouro;
+	}
+	public String getPontoReferencia() {
+		return pontoReferencia;
+	}
+	public void setPontoReferencia(String pontoReferencia) {
+		this.pontoReferencia = pontoReferencia;
+	}
+	public Integer getNumero() {
+		return numero;
+	}
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 	
 }

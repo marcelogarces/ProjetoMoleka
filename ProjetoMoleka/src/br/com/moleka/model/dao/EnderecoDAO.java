@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import br.com.moleka.model.dominio.Endereco;
+import br.com.moleka.model.dominio.TipoLogradouro;
 
 
 public class EnderecoDAO implements Serializable {
@@ -29,5 +30,5 @@ public class EnderecoDAO implements Serializable {
 	public void atualizar(Endereco endereco){
 		dao.atualizar(endereco);
 	}
-
+	
 }

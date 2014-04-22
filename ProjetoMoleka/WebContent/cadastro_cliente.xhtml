@@ -45,9 +45,10 @@
 					</p:tab>
 
 					<p:tab title="Endereço">
+						
 						<div class="grid-3-12">
 							<h:outputLabel for="uf" value="UF: " styleClass="formee-lbl" />
-							<p:selectOneMenu value="#{pessoaBean.estadoSelecionado}" id="uf" 
+							<p:selectOneMenu value="#{pessoaBean.estadoSelecionado}" id="uf" required="true" requiredMessage="UF é obrigatório"
 								effect="fold" var="e" styleClass="formee-medium" filter="true"
 								filterMatchMode="startsWith" converter="estado">
 								<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -63,9 +64,9 @@
 						</div>
 
 
-						<div class="grid-5-12">
+						<div class="grid-3-12">
 							<h:outputLabel value="Cidade :" for="cidade" />
-							<p:selectOneMenu id="cidade"
+							<p:selectOneMenu id="cidade" required="true" requiredMessage="Cidade é obrigatório.s"
 								value="#{pessoaBean.cidadeSelecionada}" effect="fold" var="c"
 								styleClass="formee-medium" filter="true"
 								filterMatchMode="startsWith" converter="cidade">
@@ -78,21 +79,46 @@
 							</p:selectOneMenu>
 						</div>
 
-						<div class="grid-4-12">
+						<div class="grid-6-12">
 							<niltech:campoTexto id="bairro" rotulo="Bairro "
 								valor="#{pessoaBean.pessoa.endereco.bairro}" tamanho="30" />
 						</div>
-
+						
 						<div class="grid-3-12">
-							<niltech:campoTexto id="logradouro" rotulo="Logradouro: "
-								valor="#{pessoaBean.pessoa.endereco.logradouro}" tamanho="30" />
+						    <h:outputLabel value="Tipo Logradouro :" for="tipoLogradouro" />
+							<p:selectOneMenu  id="tipoLogradouro" value="#{pessoaBean.tipoLogradouroSelecionado}" converter="tipoLogradouro" 
+							required="true" requiredMessage="Tipo de logradouro é obrigatório" styleClass="formee-medium">
+								<f:selectItem itemLabel="Selecione..." itemValue="" />
+								<f:selectItems value="#{pessoaBean.tipoLogradouros}" var="tipoLogradouro"
+									itemLabel="#{tipoLogradouro.descricao}" itemValue="#{tipoLogradouro}" />
+							</p:selectOneMenu>
 						</div>
 
-						<div class="grid-3-12">
+						<div class="grid-4-12">
+							<niltech:campoTexto id="logradouro" rotulo="Logradouro: " valor="#{pessoaBean.pessoa.endereco.logradouro}" tamanho="3" />
+						</div>
+						
+						<div class="grid-1-12">
+							<niltech:campoTexto id="numero" rotulo="Número: "
+							valor="#{pessoaBean.pessoa.endereco.numero}" tamanho="4" />
+						</div>
+						
+						<div class="grid-4-12">
+								<niltech:campoTexto id="complemento" rotulo="Complemento: "
+								valor="#{pessoaBean.pessoa.endereco.complemento}" tamanho="5" />					
+						</div>
+						
+
+						<div class="grid-2-12">
 							<niltech:campoMascara id="cep" rotulo="Cep: "
 								mascara="99.999-999" valor="#{pessoaBean.pessoa.endereco.cep}" />
 						</div>
-
+						
+						<div class="grid-10-12">
+							<niltech:campoTexto id="pontoReferencia" rotulo="Ponto de referência: "
+								 valor="#{pessoaBean.pessoa.endereco.pontoReferencia}" />
+						</div>
+						
 					</p:tab>
 
 				</p:tabView>
@@ -110,7 +136,7 @@
 			<h:panelGroup id="panelGroupGrid">
 				<p:dataTable value="#{pessoaBean.pessoas}" var="pessoa"
 					emptyMessage="Nenhum registro encontrado" id="grid"
-					styleClass="grid-12-12" paginator="true" rows="8">
+					styleClass="grid-12-12" paginator="true" rows="10">
 
 					<p:column headerText="Nome" width="400">
 						<h:outputText value="#{pessoa.nome}" />

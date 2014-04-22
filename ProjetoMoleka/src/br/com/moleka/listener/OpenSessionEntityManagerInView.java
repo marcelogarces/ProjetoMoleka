@@ -18,11 +18,11 @@ public class OpenSessionEntityManagerInView implements PhaseListener{
 
 		if (fase.getPhaseId().equals(PhaseId.RESTORE_VIEW)) {
 
-			System.out.println("Obtendo Entity Manager da fábrica...");
+			System.out.println("Obtendo Entity Manager da fÔøΩbrica...");
 			EntityManager em = JPAUtil.getEntityManager();
-			System.out.println("Inianado transação........");
+			System.out.println("Inianado transaÔøΩÔøΩo........");
 			em.getTransaction().begin();
-			System.out.println("Inserindo o entity manager para requisição...");
+			System.out.println("Inserindo o entity manager para requisiÔøΩÔøΩo...");
 			FacesContextUtil.setRequestEntityManager(em);
 		}
 
@@ -35,21 +35,20 @@ public class OpenSessionEntityManagerInView implements PhaseListener{
 			EntityManager em = FacesContextUtil.getRequestEntityManager();
 			try {
 
-				System.out.println("Realizando commit na transaçào...");
+				
 				em.getTransaction().commit();
 
 			} catch (PersistenceException pe) {
 
-				System.out.println("Ocorreu Erro ou Falha na transação...");
-				System.out.println("Verificando se transação está ativa...");
+		
 				if (em.getTransaction().isActive()) {
-					System.out.println("Executando rollback na transação...");
+			
 					em.getTransaction().rollback();
 
 				}
 
 			} finally {
-				System.out.println("Fechando Entity manager...");
+			
 				em.close();
 			}
 

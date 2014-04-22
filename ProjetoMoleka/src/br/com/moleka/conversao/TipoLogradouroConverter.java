@@ -6,13 +6,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import br.com.moleka.model.dao.TipoProdutoDAO;
-import br.com.moleka.model.dominio.TipoProduto;
+import br.com.moleka.model.dao.TipoLogradouroDAO;
+import br.com.moleka.model.dominio.Cidade;
+import br.com.moleka.model.dominio.TipoLogradouro;
 import br.com.moleka.util.FacesContextUtil;
 
-@FacesConverter(value="tipoProduto")
-public class TipoProdutoConverter implements Converter {
-	
+@FacesConverter(value="tipoLogradouro")
+public class TipoLogradouroConverter implements Converter{
+
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
         if (submittedValue.trim().equals("")) {
@@ -20,10 +21,10 @@ public class TipoProdutoConverter implements Converter {
         } else {
             try {
                 long id = Long.parseLong(submittedValue);
-                TipoProdutoDAO tipoProdutoDAO = new TipoProdutoDAO(FacesContextUtil.getRequestEntityManager());
-                return tipoProdutoDAO.obterTipoProdutoPorCodigo(id);        
+                TipoLogradouroDAO tipoLogradouroDAO = new TipoLogradouroDAO(FacesContextUtil.getRequestEntityManager());
+                return tipoLogradouroDAO.obterTipoLogradouroPorCodigo(id);     
             } catch(NumberFormatException exception) {
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na conversão", "Não é um tipo de produto válido."));
+                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na conversão", "Não é uma cidade válido."));
             }
         }
     }
@@ -33,8 +34,9 @@ public class TipoProdutoConverter implements Converter {
         if (value == null || value.equals("")) {
             return "";
         } else {
-            return String.valueOf(((TipoProduto) value).getId());
+            return String.valueOf(((TipoLogradouro) value).getId());
         }
     }
+
 
 }

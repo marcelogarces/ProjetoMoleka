@@ -1,6 +1,5 @@
 package br.com.moleka.managedBean;
 
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,9 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 import net.sf.jasperreports.engine.JRException;
-
 import org.apache.log4j.Logger;
 import br.com.moleka.model.dao.PedidoDAO;
 import br.com.moleka.model.dao.PessoaDAO;
@@ -33,10 +30,11 @@ import br.com.moleka.util.RelatorioUtil;
 public class PedidoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	Logger log = Logger.getLogger(PedidoBean.class);
 
-	PessoaDAO pessoaDAO = new PessoaDAO(FacesContextUtil.getRequestEntityManager());
+	PessoaDAO pessoaDAO = new PessoaDAO(
+			FacesContextUtil.getRequestEntityManager());
 
 	private String nome;
 	private String telefone;
@@ -46,6 +44,7 @@ public class PedidoBean implements Serializable {
 	private Double valorTotal = 0.0;
 	List<Item> itens;
 	Pedido pedido;
+	private Boolean pedidoComFrete;
 
 	@PostConstruct
 	public void init() {
@@ -82,35 +81,51 @@ public class PedidoBean implements Serializable {
 			valorTotal += (item.getPrecoUnitario().doubleValue() * item
 					.getQuantidade());
 		}
+
 	}
-	
-	public void teste(){
-		
-		System.out.println("Teste oncomplete......");
+
+	public void calcularFrete() {
+
+		if (pedidoComFrete) {
+
+			valorTotal += 3.00;
+		} else {
+
+			valorTotal += -3.00;
+		}
 	}
 
 	public void finalizarPedido() throws Exception {
 
-		PedidoDAO pedidoDAO = new PedidoDAO(FacesContextUtil.getRequestEntityManager());
-
+		PedidoDAO pedidoDAO = new PedidoDAO(FacesContextUtil.getRequestEntityManager());		
+		Boolean balcao = false;
 		List<Item> itens = new ArrayList<Item>();
 		for (Item item : this.itens) {
 			if (item.getQuantidade() > 0) {
 				itens.add(item);
 			}
+		}	
+		if(pedidoComFrete){
+			ProdutoDAO produtoDAO = new ProdutoDAO(FacesContextUtil.getRequestEntityManager());
+			Item item = new Item();
+			Produto frete = produtoDAO.obterFrete();
+			item.setPedido(pedido);
+			item.setPrecoUnitario(frete.getPreco());
+			item.setProduto(frete);
+			item.setQuantidade(1);
+			itens.add(item);
 		}
-
 		pedido.setItens(itens);
 		pedido.setValorTotal(new BigDecimal(valorTotal));
 		pedidoDAO.salvar(pedido);
-
+		
+		if(cliente.getNome().equalsIgnoreCase("Balcão")){
+			balcao = true;
+		}
 		this.pedido = null;
 		this.cliente = null;
-
 		FacesContextUtil.setMensagemInfo("Pedido finalizado com sucesso.");
-		
-		gerarPdfPedido(itens);
-		
+		gerarPdfPedido(itens,balcao);
 	}
 
 	private List<Item> gerarItens(Pedido pedido) {
@@ -130,22 +145,23 @@ public class PedidoBean implements Serializable {
 
 			itens.add(item);
 		}
-		
-		System.out.println("teste.......");
 
 		return itens;
 	}
-	
-	private void gerarPdfPedido(List<Item> itensPedido) throws IOException, JRException{
-		
-		String localRelatorio = "/relatorios/report3.jasper";
-		
-		Map<String,Object> parametros = new HashMap<String, Object>();
-		
+
+	private void gerarPdfPedido(List<Item> itensPedido, Boolean balcao) throws IOException,
+			JRException {
+
+		String localRelatorio;	
+		if(balcao){
+			localRelatorio = "/relatorios/pedido.jasper";
+		}else{
+			localRelatorio = "/relatorios/pedido_cliente.jasper";
+		}		
+		Map<String, Object> parametros = new HashMap<String, Object>();
 		parametros.put("p1", "parametro1");
-		
 		RelatorioUtil.gerarRelatorio(localRelatorio, parametros, itensPedido);
-		
+
 	}
 
 	public Pessoa getCliente() {
@@ -210,6 +226,14 @@ public class PedidoBean implements Serializable {
 
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public Boolean getPedidoComFrete() {
+		return pedidoComFrete;
+	}
+
+	public void setPedidoComFrete(Boolean pedidoComFrete) {
+		this.pedidoComFrete = pedidoComFrete;
 	}
 
 }

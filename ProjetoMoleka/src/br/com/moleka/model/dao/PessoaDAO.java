@@ -39,7 +39,7 @@ public class PessoaDAO implements Serializable {
 	}
 	
 	public List<Pessoa>listarTodasPessoas(){
-		System.out.println("consultando pessoas...");
+		//System.out.println("consultando pessoas...");
 		List<Pessoa> pessoas = entityManager.createQuery("from Pessoa order by id desc").getResultList();	
 		return pessoas;
 	}

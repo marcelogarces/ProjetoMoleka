@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -50,7 +48,6 @@ public class PesquisaClienteBean implements Serializable {
 			}
 		}
 		public String selecionar(Pessoa pessoa) throws IOException{
-			System.out.println("pppppppppppppppppppp");
 			FacesContext.getCurrentInstance().getExternalContext().redirect("menu.jsf");  
 			return "menu.xhtml";
 		}
